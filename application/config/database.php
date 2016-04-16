@@ -81,7 +81,6 @@ $db['default'] = array(
 	'database' => 'rgjs',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
-	'port' => 5432,
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
