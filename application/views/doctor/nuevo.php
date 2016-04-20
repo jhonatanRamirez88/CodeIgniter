@@ -27,10 +27,14 @@
 					<?php endforeach; ?>
 				</select>
 			</div>
-		</div>		
+		</div>	
+
+		<!-- trabajando con los horarios -->
 		<div class="12u 12u$(xsmall)">
 			<h4>Horarios de atención:</h4>
 		</div>
+
+
 		<div class="12u 12u$(xsmall)">
 			<div class="table-wrapper">
 				<table>

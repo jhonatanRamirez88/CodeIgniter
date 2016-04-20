@@ -14,7 +14,6 @@ class Doctor_model extends CI_Model {
 	public function delete_doctor($data){
 		$sql = "select * from cita where (cve_usu =".$data['cve']." and fecha > now())";
 		$res = $this->db->query($sql);
-
 		$sql = "select cve from doctor where cve_usu = ".$data['cve']."";
 		$res = $this->db->query($sql);
 		$var1= $res->result_array();
