@@ -12,7 +12,8 @@ class Usuario_model extends CI_Model {
 	}
 
 	public function get_all(){		
-		$sql = "SELECT * FROM usuario ORDER BY cve";
+		//$sql = "SELECT * FROM usuario ORDER BY cve"; // esto regresa (cve_usu)cve,nombre,appat, apmat,telefono particular
+		$sql = "Select usuario.cve AS cve, usuario.nombre AS nombre, usuario.ap_paterno AS ap_paterno, usuario.ap_materno AS ap_materno,usuario.telefono_particular AS par, vigencia.descripcion AS vig FROM usuario inner join doctor on  doctor.cve_usu = usuario.cve inner join vigencia on vigencia.cve = doctor.cve_vigencia ORDER BY cve";
 		$getusu = $this->db->query($sql);
 		return $getusu->result_array();
 	}

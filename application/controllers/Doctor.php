@@ -100,14 +100,13 @@ class Doctor extends CI_Controller {
 			'esp' => $this->input->post('esp'),
 			'cve_usu' => $this->input->post('cve_doc'),
 		);
+
 		$this->doctor_model->update_doctor($data);
 		redirect(base_url("index.php/doc/ver"));	
 	}
 
 	public function delete_doctor($cve){
-		$data = array(
-			'cve' => $cve
-			);
+		$data = array('cve' => $cve);
 		$this->doctor_model->delete_doctor($data);
 		redirect(base_url("index.php/doc/ver"));
 	}

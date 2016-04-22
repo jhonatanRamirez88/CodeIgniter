@@ -7,6 +7,7 @@
 					<th>Nombre</th>
 					<th>Apellido paternor</th>
 					<th>Apellido materno</th>
+					<th>Estado</th>
 					<th>Actualizar</th>
 					<th>Eliminar</th>
 				</tr>
@@ -21,6 +22,7 @@
 						<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['nombre']; ?></td>
 						<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['ap_paterno']; ?></td>
 						<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['ap_materno']; ?></td>
+						<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['vig']; ?></td>
 						<td id="btnRe<?php echo $item['cve']; ?>">
 							<input value="Actualizar" onclick="alertUpdate(<?php echo $item['cve']; ?>)" type="button" />
 						</td>

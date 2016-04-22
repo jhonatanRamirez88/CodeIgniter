@@ -7,12 +7,15 @@ class Doctor_model extends CI_Model {
 	}
 
 	public function insert_doctor($data){
-		$sql = "insert into doctor (telefono_movil, cve_esp, cve_usu, cve_vigencia) values('".$data['telmov']."',".$data['espk'].",".$data['usuk'].", (select cve from vigencia where descripcion = 'alta') ) RETURNING cve";
+		$sql = "insert into doctor (telefono_movil, cve_esp, cve_usu, cve_vigencia) values('".$data['telmov']."',".$data['espk'].",".$data['usuk'].", (select cve from vigencia where descripcion = 'vigente') ) RETURNING cve";
 		$res = $this->db->query($sql);
 		return $res->result_array();
 	}
+
+
 	public function delete_doctor($data){
-		$sql = "select * from cita where (cve_usu =".$data['cve']." and fecha > now())";
+		
+		/*$sql = "select * from cita where (cve_usu =".$data['cve']." and fecha > now())";
 		$res = $this->db->query($sql);
 		$sql = "select cve from doctor where cve_usu = ".$data['cve']."";
 		$res = $this->db->query($sql);
@@ -29,7 +32,17 @@ class Doctor_model extends CI_Model {
 		$sql = "delete from doctor where cve = ".$cve2."";
 		$res = $this->db->query($sql);
 		$sql = "delete from usuario where cve = ".$data['cve']."";
-		$res =  $this->db->query($sql);							    					
+		$res =  $this->db->query($sql);	*/
+		
+
+		//si tiene citas todavia el doctor
+		$sql = "select * from cita where (cve_usu =".$data['cve']." and fecha > now())";
+		$res = $this->db->query($sql);
+
+		$sql = "update doctor  SET cve_vigencia = 2 WHERE cve_usu = ".$data['cve']."";
+		$res = $this->db->query($sql);
+
+
 	}	
 
 	public function update_doctor($data){
