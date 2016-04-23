@@ -24,7 +24,7 @@
 				<div class="select-wrapper">
 					<select name="esp" > 
 						<?php foreach ($pollos as $item ): ?>
-							<?php echo "<option value='".$item['cve']."'>".$item['descripcion']."</option>"; ?>
+							 <option <?php if(strcmp ( $item['descripcion'] , $datos['esp'] ) == 0){echo("selected");}?> <?php echo"value='".$item['cve']."'>".$item['descripcion']; ?> </option>
 						<?php endforeach; ?>
 					</select>
 				</div>

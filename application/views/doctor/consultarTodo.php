@@ -33,11 +33,11 @@
 </section>
 <script type="text/javascript">
 	function alertUpdate(cve){
-	    location.href="http://localhost/CodeIgniter/index.php/Doctor/verUpdateConsulta/"+cve;
+	    location.href="<?php echo base_url();?>index.php/Doctor/verUpdateConsulta/"+cve;
 	}
 	function alertDelete(cve){
 	    if (confirm("¿Desas hacer eliminar este campo?") == true) {
-	        location.href="http://localhost/CodeIgniter/index.php/Doctor/delete_doctor/"+cve;
+	        location.href="<?php echo base_url();?>index.php/Doctor/delete_doctor/"+cve;
 	    }
 	}
 </script>
