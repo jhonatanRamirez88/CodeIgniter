@@ -30,6 +30,7 @@
 		</div>	
 
 		<!-- trabajando con los horarios -->
+		<!--
 		<div class="12u 12u$(xsmall)">
 			<h4>Horarios de atención:</h4>
 		</div>
@@ -50,6 +51,7 @@
 				</table>
 			</div>
 		</div>
+		-->
 		<div class="12u 12u$(xsmall)">
 			<ul class="actions">
 				<li><input type="submit" value="Guardar" class="special" /></li>
