@@ -48,7 +48,7 @@ class Doctor_model extends CI_Model {
 	public function update_doctor($data){
 		$sql = "UPDATE usuario set nombre='".$data['nom']."', ap_paterno='".$data['appat']."', ap_materno='".$data['apmat']."' ,telefono_particular='".$data['telpar']."' where cve= (SELECT cve_usu FROM doctor WHERE cve=".$data['cve_usu'].")";		
 		$this->db->query($sql);
-		$sql = "UPDATE doctor set telefono_movil='".$data['telmov']."', cve_esp='".$data['esp']."' where cve='".$data['cve_usu']."'";		
+		$sql = "UPDATE doctor set telefono_movil='".$data['telmov']."', cve_esp='".$data['esp']."', cve_vigencia='".$data['vigencia']."' where cve='".$data['cve_usu']."'";		
 		$this->db->query($sql);
 	}
 		

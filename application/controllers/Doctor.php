@@ -10,6 +10,7 @@ class Doctor extends CI_Controller {
 		$this->load->model('usuario_model');
 		$this->load->model('doctor_model');
 		$this->load->model('horario_model');
+		$this->load->model('vigencia_model');
 	}
 
 	public function view($titulo = 'home', $arg)
@@ -87,6 +88,7 @@ class Doctor extends CI_Controller {
 		$encabe = 'Modificar Doctor';
 		$arg['page'] = 'doctor/up_doc';
 		$arg['pollos'] = $this->especialidad_model->getLicenciaturas();
+		$arg['vigencia']= $this->vigencia_model->getAll();
 		$arg['datos'] = $this->usuario_model->get_inner_usuario($data);
 		//var_dump($arg['datos']);
 		$this->view($encabe,$arg);
@@ -99,6 +101,7 @@ class Doctor extends CI_Controller {
 			'telpar' => $this->input->post('telpar'),
 			'telmov' => $this->input->post('telmov'),
 			'esp' => $this->input->post('esp'),
+			'vigencia' => $this->input->post('vigencia'),
 			'cve_usu' => $this->input->post('cve_doc'),
 		);
 
