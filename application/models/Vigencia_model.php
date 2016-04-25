@@ -5,10 +5,11 @@ class Vigencia_model extends CI_Model {
 		parent::__construct();
 		$this->load->database();
 	}
-	public function getAll(){
-		$sql = "SELECT * FROM vigencia";
-		$getlic = $this->db->query($sql);
-		return $getlic->result_array();		
+	
+		public function getAll(){
+		$sql = "Select * from vigencia order by cve";
+		$getvig = $this->db->query($sql);
+		return $getvig->result_array();	
 	}	
 }
 ?>

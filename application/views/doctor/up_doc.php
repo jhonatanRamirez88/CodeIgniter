@@ -19,6 +19,19 @@
 			<div class="4u 12u$(xsmall)">
 				Telefono movil:<input name="telmov" type="text" value="<?php echo $datos['mov']; ?>"/>
 			</div>
+			<!-- Creando la parte de la vigencia desde un combo-->
+			<div class="4u 12u$(xsmall)">
+				Vigencia:
+				<div class="select-wrapper">
+					<select name="vigencia" > 
+						<?php foreach ($vigencia as $item ): ?>
+							 <option <?php if(strcmp ( $item['descripcion'] , $datos['vig'] ) == 0){echo("selected");}?> <?php echo"value='".$item['cve']."'>".$item['descripcion']; ?> </option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			</div>		
+
+
 			<div class="4u 12u$(xsmall)">
 				Especialidad:
 				<div class="select-wrapper">
