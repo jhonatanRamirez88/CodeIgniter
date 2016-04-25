@@ -10,15 +10,16 @@
 		<title>Clinica</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
+		<base href="<?php echo base_url(); ?>"/>
 		<meta name="keywords" content="" />
-		<script type='text/javascript' src="<?php echo base_url(); ?>js/jquery.min.js"></script>
-		<script src="<?php echo base_url(); ?>js/skel.min.js"></script>
-		<script src="<?php echo base_url(); ?>js/skel-layers.min.js"></script>
-		<script src="<?php echo base_url(); ?>js/init.js"></script>
-			<link rel="stylesheet" href="<?php echo base_url(); ?>css/skel.css" />
-			<link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css" />
-			<link rel="stylesheet" href="<?php echo base_url(); ?>css/style-xlarge.css" />
-			<link rel="stylesheet" href="<?php echo base_url(); ?>css/style-xsmall.css " />
+		<script type='text/javascript' src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+			<link rel="stylesheet" href="css/style-xsmall.css " />
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]
 		
 		-->

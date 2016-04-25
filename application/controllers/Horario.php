@@ -32,12 +32,9 @@ class Horario extends CI_Controller {
 				'edo' => false				
 				);
 		}else{
-			$arrayName = array(
-				'edo' => true		
-			);
+			$arrayName =$cont;
 			//Convertir result array to json
 		}
-
 		echo json_encode($arrayName);
 	}
 	/*Creamos un nuevo horario que se asocia en la vista /Doctor/ver_horario*/
@@ -53,6 +50,14 @@ class Horario extends CI_Controller {
 		}	
 		redirect(base_url("index.php/Doctor/ver_horario"));
 
+	}
+	/*HACET UN UPDATE DEL REGSTRO DE USUARIOS*/
+	public function update_horario(){
+		//Eliminamos los datos ya existentes
+		$data1 = array('doc' => $this->input->post('cvedoc'));
+		$this->horario_model->delete_horario_by_cve($data1);
+		//hacermos el insert
+		$this->crear_nuevo();
 	}
 }
 ?>
