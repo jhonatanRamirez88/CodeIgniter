@@ -15,32 +15,18 @@ class Doctor_model extends CI_Model {
 
 	public function delete_doctor($data){
 		
-		/*$sql = "select * from cita where (cve_usu =".$data['cve']." and fecha > now())";
-		$res = $this->db->query($sql);
-		$sql = "select cve from doctor where cve_usu = ".$data['cve']."";
-		$res = $this->db->query($sql);
-		$var1= $res->result_array();
-		foreach($var1 as $cve) {
-        	$cve = $cve['cve'];
-        	break;
-    	}
-    	$cve2=$cve;									
-		$sql = "delete from cita where cve_usu = ".$data['cve']."";
-		$res = $this->db->query($sql);
-		$sql = "delete from horario where cve_doc = ".$cve2."";
-		$res = $this->db->query($sql);
-		$sql = "delete from doctor where cve = ".$cve2."";
-		$res = $this->db->query($sql);
-		$sql = "delete from usuario where cve = ".$data['cve']."";
-		$res =  $this->db->query($sql);	*/
-		
 
 		//si tiene citas todavia el doctor
 		$sql = "select * from cita where (cve_usu =".$data['cve']." and fecha > now())";
 		$res = $this->db->query($sql);
+		if ($res->num_rows() == 0){
+			$sql = "update doctor  SET cve_vigencia = 2 WHERE cve_usu = ".$data['cve']."";
+			$res = $this->db->query($sql);
+		}
+		
 
-		$sql = "update doctor  SET cve_vigencia = 2 WHERE cve_usu = ".$data['cve']."";
-		$res = $this->db->query($sql);
+
+
 
 
 	}	
