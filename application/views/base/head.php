@@ -18,7 +18,10 @@
 			<link rel="stylesheet" href="<?php echo base_url(); ?>css/skel.css" />
 			<link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css" />
 			<link rel="stylesheet" href="<?php echo base_url(); ?>css/style-xlarge.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+			<link rel="stylesheet" href="<?php echo base_url(); ?>css/style-xsmall.css " />
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]
+		
+		-->
 	</head>
 	<body class="landing">
 	<!-- Main -->

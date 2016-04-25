@@ -25,7 +25,7 @@ class Doctor extends CI_Controller {
         $this->load->view($arg['page'], $arg);
         $this->load->view('base/foot');
 	}
-
+	/*mostramos la vista para dar de alta un nuevo doctor*/
 	public function verNuevo(){
 		$encabe = 'Nuevo doctor';
 		$arg['page'] = 'doctor/nuevo';
@@ -33,7 +33,8 @@ class Doctor extends CI_Controller {
 		$arg['dias'] = $this->dia_model->getAll();
 		$this->view($encabe, $arg);		
 	}
-
+	/*Recibimos los datos de la vista para crear un doctor, y hacemos la insercion con ayuda
+	del modelo*/
 	public function recibirVerNuevo(){
 		$data = array(
 			'nom' => $this->input->post('nom'),
@@ -109,6 +110,13 @@ class Doctor extends CI_Controller {
 		$data = array('cve' => $cve);
 		$this->doctor_model->delete_doctor($data);
 		redirect(base_url("index.php/doc/ver"));
+	}
+
+	public function ver_horario(){
+		$encabe = 'Horario del doctor';
+		$arg['page'] = 'doctor/add_schedule';
+		$arg['docs'] = $this->doctor_model->get_all();
+		$this->view($encabe,$arg);	
 	}
 }
 ?>

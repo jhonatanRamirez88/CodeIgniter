@@ -50,6 +50,13 @@ class Doctor_model extends CI_Model {
 		$this->db->query($sql);
 		$sql = "UPDATE doctor set telefono_movil='".$data['telmov']."', cve_esp='".$data['esp']."' where cve='".$data['cve_usu']."'";		
 		$this->db->query($sql);
+	}
+		
+	/*Obtenermos todos los doctores dados de alta, cve_doctor, nombre y apellido que estan vigentes*/
+	public function get_all(){
+		$sql = "select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1";
+		$res = $this->db->query($sql);
+		return $res->result_array();		
 	}	
 }
 ?>
