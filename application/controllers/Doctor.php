@@ -59,16 +59,6 @@ class Doctor extends CI_Controller {
         	$cveDoc = $cve['cve'];//Reuso la variable antes era un arreglo, en este paso solo tiene la cve
         	break;
     	}
-
-		/*for($index = 1; $index < 7; $index += 1){//recorre del 1 al 6 por los dias
-			$data2 = array(
-				'fec_ini' => $this->input->post('ini_'.$index),
-				'fec_fin' => $this->input->post('fin_'.$index),
-				'cve_dia' => $index,
-				'cve_doc' => $cveDoc
-				);
-			$this->horario_model->insert_horario($data2);
-		}*/	
 		redirect(base_url("index.php/doc/nuevo"));
 	}
 	

@@ -13,10 +13,10 @@
 			Apellido materno:<input name="apmat" type="text"></input>
 		</div>
 		<div class="4u 12u$(xsmall)">
-			Telefono particular:<input name="telpar" type="text"></input>
+			Telefono particular:<input name="telpar" type="tel"></input>
 		</div>
 		<div class="4u 12u$(xsmall)">
-			Telefono movil:<input name="telmov" type="text"></input>
+			Telefono movil:<input name="telmov" type="tel"></input>
 		</div>
 		<div class="4u 12u$(xsmall)">
 			Especialidad:

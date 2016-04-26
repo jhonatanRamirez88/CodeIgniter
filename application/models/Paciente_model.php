@@ -6,8 +6,7 @@ class Paciente_Model extends CI_Model{
 	}	
 	public function nuevo($data){
 		$sql = "insert into paciente (cve_usu, nacimiento, sexo, direccion) values(".$data['usu'].",'".$data['nac']."','".$data['sex']."','".$data['dir']."');";
-		$data = $this->db->query($sql);
-		return $data->result_array();
+		$this->db->query($sql);
 	}
 }
 ?>
