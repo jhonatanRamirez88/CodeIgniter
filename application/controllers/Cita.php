@@ -32,6 +32,7 @@ public function view($titulo = 'home', $arg)
 		$encabe = 'Nueva cita.';
 		$arg['page'] = 'cita/nuevo';
 		$arg['pollo'] = $this->doctor_model->get_all();
+		$arg['paciente'] = $this->paciente_model->todo();//obtengo cve, nombre, appat, apmat
 		$this->view($encabe, $arg);
 	}
 
