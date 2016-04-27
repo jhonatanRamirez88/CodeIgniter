@@ -24,11 +24,6 @@ class Doctor_model extends CI_Model {
 			$res = $this->db->query($sql);
 		}
 		
-
-
-
-
-
 	}	
 
 	public function update_doctor($data){
