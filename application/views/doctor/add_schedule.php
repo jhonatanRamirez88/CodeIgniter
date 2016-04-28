@@ -95,10 +95,10 @@
 			str += "<tr id="+(i+1)+">"
 			str += "<td>"+dis[i]+"</td>"
 			str += '<td>';
-			str += '<input class="" name="ini_'+(i+1)+'" id="ini_'+(i+1)+'" type="time" min="09:00" max="20:00" value="09:00" requiered>';
+			str += '<input class="" name="ini_'+(i+1)+'" id="ini_'+(i+1)+'" type="time" min="09:00" max="20:00" value="09:00" requiered readonly>';
 			str += '<a class="button small" onclick="setSiguiente('+(i+1)+');">Ok</a>';
 			str += '</td>';
-			str += '<td><input name="fin_'+(i+1)+'" id="fin_'+(i+1)+'" type="time" min="10:00" max="21:00" disabled = "disabled" value="10:00" requiered>'
+			str += '<td><input name="fin_'+(i+1)+'" id="fin_'+(i+1)+'" type="time" min="10:00" max="21:00" readonly value="10:00" requiered>'
 			str += '<a class="button small" onclick="guardar('+(i+1)+');">Ok</a>';
 			str += '</td>';
 			str += "</tr>";  
@@ -130,10 +130,12 @@
   		}
   		$('#fin_'+val).attr('min', str);//modificamos el minimo que puede elegir en el fin de hora
   		$('#fin_'+val).val(str);//Modificamos el contenido a visulizar
-  		if(edo){
-  			$('#fin_'+val).attr("disabled",false);
+  		if(edo){//desabilitar el sig hora
+  			var str = 'fin_'+val;
+  			$("#"+str).attr("readonly", false);
   		}else{
-  			$('#fin_'+val).attr("disabled",true);
+  			var str = 'fin_'+val;
+  			$("#"+str).attr("readonly", true);  			
   			alert("Hora de inicio no valida.");
   		}
 
@@ -202,6 +204,16 @@
 	    	$('#'+ide).val(bob);
 	    }
 
-  	}  	
+  	} 
+
+  	function verificaReadOnlyDesactivar(ide){
+  		var rea = $('#'+ide).attr("readonly");
+  		var edo = false;
+		if(rea == "readonly"){
+	       	$("#"+ide).attr("readonly", false);
+	       	edo = true;
+	    }
+	    return edo;
+  	}
   	
 </script>
