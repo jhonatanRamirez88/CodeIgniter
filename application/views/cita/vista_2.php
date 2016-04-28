@@ -1,7 +1,7 @@
 <head> <h1>Cita de pasciente</h1></head>
 <section>
 
-	<form method="POST" action="<?php echo base_url(); ?>index.php/Cita/buscar">						
+	<form method="POST" action="<?php echo base_url(); ?>index.php/Paciente/verNuevo">						
 			<div class="row uniform 50%">
 				<div class="4u 12u$(xsmall)">
 					Nombre del doctor:					

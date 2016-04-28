@@ -1,5 +1,13 @@
 <section>
-
+	<form action="<?php echo base_url(); ?>index.php/Paciente/verNuevo">
+		<div class="row uniform 50%">
+						<div class="5u 12u$(xsmall)">
+						<ul class="actions">
+							<li><input type="submit" value="Dar de alta paciente" class="special" /></li>		
+						</ul>
+						</div>
+			</div>
+	</form>
 	<form method="POST" action="<?php echo base_url(); ?>index.php/Cita/buscar">
 			<div class="row uniform 50%">
 
@@ -31,13 +39,14 @@
 
 
 			</div>
-<div class="row uniform 50%">
-			<div class="5u 12u$(xsmall)">
-			<ul class="actions">
-				<li><input type="submit" value="Buscar" class="special" /></li>		
-			</ul>
+
+			<div class="row uniform 50%">
+						<div class="5u 12u$(xsmall)">
+						<ul class="actions">
+							<li><input type="submit" value="Buscar" class="special" /></li>		
+						</ul>
+						</div>
 			</div>
-</div>
 
 
 	</form>
