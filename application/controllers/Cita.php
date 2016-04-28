@@ -11,6 +11,7 @@ class Cita extends CI_Controller {
 		$this->load->model('paciente_model');
 		$this->load->model('cita_model');
 		$this->load->model('doctor_model');
+		$this->load->model('dia_model');
 	}
 
 public function view($titulo = 'home', $arg)
@@ -30,12 +31,28 @@ public function view($titulo = 'home', $arg)
 
 	function nuevo(){
 		$encabe = 'Nueva cita.';
-		$arg['page'] = 'cita/nuevo';
+		$arg['page'] = 'cita/vista_1';
 		$arg['pollo'] = $this->doctor_model->get_all();
-		$arg['paciente'] = $this->paciente_model->todo();//obtengo cve, nombre, appat, apmat
-		
+		$arg['cita'] = $this->cita_model->get_all();
+		//$arg['paciente'] = $this->paciente_model->todo();//obtengo cve, nombre, appat, apmat
+
 		$this->view($encabe, $arg);
 	}
+
+
+	function buscar(){
+		$encabe = 'Nueva cita.';
+		$arg['page'] = 'cita/vista_2';
+		$data = array(
+			'doc' => $this->input->post('doctor'),
+			'dia' => $this->input->post('dia'),			
+		);
+	
+		$arg['horas']=$this->dia_model->disponibilidad_dia($data,$arg);
+		$this->view($encabe, $arg, $data);
+		
+	}
+
 
 
 

@@ -7,6 +7,11 @@ class Cita_Model extends CI_Model{
 
 	
 
+	public function get_all(){
+		$sql = "Select cve, descripcion from dia;";
+		$getdia=$this->db->query($sql);
+		return $getdia->result_array();
+	}
 
 
 
