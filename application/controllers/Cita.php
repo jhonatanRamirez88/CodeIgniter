@@ -46,10 +46,10 @@ public function view($titulo = 'home', $arg)
 		$data = array(
 			'doc' => $this->input->post('doctor'),
 			'dia' => $this->input->post('dia'),			
-		);
-	
-		$arg['horas']=$this->dia_model->disponibilidad_dia($data,$arg);
-		$this->view($encabe, $arg, $data);
+		);	
+		var_dump($data);
+		$arg['horas']=$this->dia_model->horario_dia($data);
+		$this->view($encabe, $arg);
 		
 	}
 

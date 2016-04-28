@@ -6,7 +6,7 @@
 				<div class="4u 12u$(xsmall)">
 				Selecciona un doctor
 					<div class="select-wrapper">
-						<select id="doctor" >
+						<select name="doctor" >
 						<option value=""></option>
 						<?php foreach ($pollo as $doc): ?>
 							<option class="valor" value="<?php echo $doc['cdoc']?>"><?php echo $doc['nom']?> <?php echo $doc['ape']?></option>
@@ -20,7 +20,7 @@
 				<div class="4u 12u$(xsmall)">
 				Selecciona el día
 					<div class="select-wrapper">
-						<select id="dia" >
+						<select name="dia" >
 						<option value=""></option>
 						<?php foreach ($cita as $doc): ?>
 							<option class="valor" value="<?php echo $doc['cve']?>"><?php echo $doc['descripcion']?></option>
