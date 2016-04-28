@@ -28,30 +28,6 @@
 				</select>
 			</div>
 		</div>	
-
-		<!-- trabajando con los horarios -->
-		<!--
-		<div class="12u 12u$(xsmall)">
-			<h4>Horarios de atención:</h4>
-		</div>
-
-
-		<div class="12u 12u$(xsmall)">
-			<div class="table-wrapper">
-				<table>
-					<tbody>
-						<?php foreach ($dias as $dia): ?>
-							<tr>
-								<td><?php echo $dia['descripcion']?></td>
-								<td><input name="ini_<?php echo $dia['cve']?>" type="time"></td>
-								<td><input name="fin_<?php echo $dia['cve']?>" type="time"></td>
-							</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		-->
 		<div class="12u 12u$(xsmall)">
 			<ul class="actions">
 				<li><input type="submit" value="Guardar" class="special" /></li>

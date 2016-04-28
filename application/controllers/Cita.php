@@ -33,7 +33,39 @@ public function view($titulo = 'home', $arg)
 		$arg['page'] = 'cita/nuevo';
 		$arg['pollo'] = $this->doctor_model->get_all();
 		$arg['paciente'] = $this->paciente_model->todo();//obtengo cve, nombre, appat, apmat
+		
 		$this->view($encabe, $arg);
+	}
+
+
+
+
+	//insercion de la cita
+	public function recibirVerNuevo(){
+		$data = array(
+			'nom' => $this->input->post('nom'),
+			'appat' => $this->input->post('appat'),
+			'apmat' => $this->input->post('apmat'),
+			'telpar' => $this->input->post('telpar')
+		);
+	
+		$cveUsu = $this->usuario_model->insert_usuario($data);
+		
+    	foreach($cveUsu as $cve) {
+        	$cveUsu = $cve['cve'];//Reuso la variable antes era un arreglo, en este paso solo tiene la cve
+        	break;
+    	}
+		$data1 = array(
+			'telmov' => $this->input->post('telmov'),
+			'usuk' => $cveUsu,
+			'espk' => $this->input->post('esp')
+			);
+		$cveDoc = $this->doctor_model->insert_doctor($data1);
+    	foreach($cveDoc as $cve) {
+        	$cveDoc = $cve['cve'];//Reuso la variable antes era un arreglo, en este paso solo tiene la cve
+        	break;
+    	}
+		redirect(base_url("index.php/cita/nuevo"));
 	}
 
 
