@@ -82,33 +82,45 @@ public function view($titulo = 'home', $arg)
 		redirect(base_url("index.php/cita/buscar_paciente"));
 	}
 
+
+	/*
+	recibe la clave que se va a consultar y llenar la vista update
+	*/
+	public function verUpdateConsulta($cve){
+		$data = array(
+			'cve' => $cve
+			);
+		$encabe = 'Modificar Cita';
+		$arg['page'] = 'cita/up_cit';
+		$arg['pollos'] = $this->especialidad_model->getLicenciaturas();
+		$arg['datos'] = $this->usuario_model->get_inner_usuario($data);
+		$this->view($encabe,$arg);
+	}
+	public function executeUpdate(){
+		$data = array(
+			'nom' => $this->input->post('nom'),
+			'appat' => $this->input->post('appat'),
+			'apmat' => $this->input->post('apmat'),
+			'telpar' => $this->input->post('telpar'),
+			'telmov' => $this->input->post('telmov'),
+			'esp' => $this->input->post('esp'),
+			'vigencia' => $this->input->post('vigencia'),
+			'cve_usu' => $this->input->post('cve_doc'),
+		);
+		$this->cita_model->update_cita($data);
+		redirect(base_url("index.php/cita/buscar_paciente"));	
+	}
+
+
+
 	//insercion de la cita
 	public function recibirVerNuevo(){
-//nombre(cve_doc),hini,hfin,doctor(cve_pac),hora_cita
-//cve_doc, cve_usu, tcita,fecha,hora,nvo
 		$data = array(
 			'cve_doc' => $this->input->post('cvedoc'),
 			'cve_usu' => $this->input->post('doctor'),
 			'hora' => $this->input->post('hora_cita'),
-			//'fecha' => $this->input->post('fecha')
 		);
-	print_r($data);
 		$cveUsu = $this->cita_model->insert_cita($data);
-		/*
-    	foreach($cveUsu as $cve) {
-        	$cveUsu = $cve['cve'];//Reuso la variable antes era un arreglo, en este paso solo tiene la cve
-        	break;
-    	}
-		$data1 = array(
-			'telmov' => $this->input->post('telmov'),
-			'usuk' => $cveUsu,
-			'espk' => $this->input->post('esp')
-			);
-		$cveDoc = $this->_model->insert_doctor($data1);
-    	foreach($cveDoc as $cve) {
-        	$cveDoc = $cve['cve'];//Reuso la variable antes era un arreglo, en este paso solo tiene la cve
-        	break;
-    	}*/
 		redirect(base_url("index.php/cita/nuevo"));
 	}
 
