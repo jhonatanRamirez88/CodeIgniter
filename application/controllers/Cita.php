@@ -47,10 +47,11 @@ public function view($titulo = 'home', $arg)
 			'doc' => $this->input->post('doctor'),
 			'dia' => $this->input->post('dia'),			
 		);	
-		var_dump($data);
 		$arg['horas']=$this->dia_model->horario_dia($data);
 		$arg['pac']=$this->paciente_model->todo($data);
 		$arg['ocu']=$this->cita_model->horas_ocupadas($data);
+		$arg['numero_dia']  = $this->input->post('dia');
+		//var_dump($arg['ocu']);
 		$this->view($encabe, $arg);
 		
 	}
@@ -66,8 +67,8 @@ public function view($titulo = 'home', $arg)
 		$data = array(
 			'cve_doc' => $this->input->post('cvedoc'),
 			'cve_usu' => $this->input->post('doctor'),
-			'hora' => $this->input->post('hora_cita'),
-			//'fecha' => $this->input->post('fecha')
+			'dia' => $this->input->post('dia_cita'),
+			'hora' => $this->input->post('hora_cita')
 		);
 	print_r($data);
 		$cveUsu = $this->cita_model->insert_cita($data);
