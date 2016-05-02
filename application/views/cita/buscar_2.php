@@ -5,6 +5,7 @@
 		<thead>
 			<tr>	
 				<th>Clave</th>
+				<th>Nombre doctor</th>
 				<th>fecha</th>
 				<th>hora</th>
 				<th>Actualizar</th>
@@ -18,6 +19,7 @@
 				?>
 				<tr id="row<?php echo $item['cve']; ?>">
 					<td><?php echo $indice+=1; ?></td>
+					<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['nombre']; ?> </td>
 					<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['fecha']; ?> </td>
 					<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['hora']; ?></td>
 					<td id="btnRe<?php echo $item['cve']; ?>">
