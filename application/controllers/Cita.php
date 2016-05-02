@@ -52,7 +52,6 @@ public function view($titulo = 'home', $arg)
 		$arg['ocu']=$this->cita_model->horas_ocupadas($data);//hora from cita
 		$this->view($encabe, $arg);		
 		//var_dump($arg['ocu']);
-		$this->view($encabe, $arg);
 		
 	}
 
@@ -90,14 +89,14 @@ public function view($titulo = 'home', $arg)
 	*/
 	public function verUpdateCita($cve){
 		$data = array(
-			'cve' => $cve
+			'cita_cve' => $cve
 			);
 		$encabe = 'Modificar Cita';
-		$arg['page'] = 'cita/up_cit';
-		$arg['cita'] = $this->cita_model->todo($data);
-		$arg['pollos'] = $this->especialidad_model->getLicenciaturas();
-		$arg['datos'] = $this->cita_model->get_inner_usuario($data);
+		$arg['page'] = 'cita/up_cita';
+		$arg['cita'] = $this->cita_model->get_cita_cve($data);//Contenido de esa cita
+		$arg['docs'] = $this->doctor_model->get_all();
 		$this->view($encabe,$arg);
+		
 	}
 	public function executeUpdate(){
 		$data = array(
@@ -112,6 +111,21 @@ public function view($titulo = 'home', $arg)
 		);
 		$this->cita_model->update_cita($data);
 		redirect(base_url("index.php/cita/buscar_paciente"));	
+	}
+
+	public function get_horarios_doc_fecha(){
+		$edo = date_default_timezone_set ( "America/Mexico_City" );
+		$fecha = $this->input->get('fecha');
+		$str = date("l", strtotime($fecha));
+		$data = array(
+			'doc' => $this->input->get('cvedoc'),
+			'fecha' => $fecha,
+			'dia' =>  $str
+		);
+		//$resini = $this->dia_model->horario_dia($data);// cdoc, hini, hfin, nom(usuario), apppat, apmat //le enviamos en data el cve_doc y el cve_dia
+		//$res = $this->cita_model->horas_ocupadas($data);
+		//var_dump($resini);
+		echo json_encode($data);
 	}
 
 

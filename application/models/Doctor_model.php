@@ -40,6 +40,12 @@ class Doctor_model extends CI_Model {
 		return $res->result_array();		
 	}	
 
+	public function get_doctor($data){
+		//$sql = "SELECT doctor.cve AS cve_doc, usuario.nombre AS nombre, usuario.ap_paterno AS apellido FROM doctor INNER JOIN usuario ON doctor.cve_usu = usuario.cve WHERE doctor.cve = ".data['cve_doc'];
+		$res = $this->db->query($sql);
+		return $res->array_array();		
+	}
+
 	
 }
 ?>
