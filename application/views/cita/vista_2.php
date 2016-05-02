@@ -61,35 +61,7 @@
 
 <?php
 $ocupa;
-		/*foreach ($ocu as $doc): 
-						$ocupa= (int)$doc['hora'];											
-/*				for ( $i = (int)$ini; $i < (int)$fin; $i+=1)
-					{
-						if ($i == $ocupa) {
-								echo "</br>quite ";								
-							}else{
-								
-									echo "<br/> uno $i";																	
-						}
-					}//fin del for
-
-
-					for ( $i = $tamaño; $i < (int)$fin; $i+=1)
-					{
-						if ($i == $ocupa) {
-								echo "</br>quite ";								
-							}else{
-								
-									echo "<br/> uno $i";																	
-						}
-					}//fin del for
-
-
-
-		endforeach;
-
-*/
-
+	
 $arreglo= array();
 for ( $i = (int)$ini; $i < (int)$fin; $i+=1)
 {
@@ -103,7 +75,7 @@ foreach ($ocu as $var => $value) {
 	 $modificado[(int)$value['hora']] = (int)$value['hora'];//nos dice los dias ocupados
 }
 
-print_r($modificado);
+//print_r($modificado);
 
 foreach($arreglo as $key => $value){//arreglo tiene los dias completos 
   if(!isset($modificado[$key])){
@@ -117,7 +89,7 @@ foreach($arreglo as $key => $value){
        $disponible[$key] = $value; //horas disponibles que mostrare en el combobox
   }
 }
-print_r($disponible);
+//print_r($disponible);
 
 
 ?>
@@ -130,7 +102,7 @@ print_r($disponible);
 						<select name="hora_cita" >
 						<option value=""></option>
 						<?php foreach ($disponible as $doc): ?>
-							<option class="valor" value=""><?php echo $doc?></option>
+							<option class="valor" value=""><?php echo $doc.':00:00'?></option>
 						<?php endforeach; ?>			
 						</select>
 					</div><!-- termina el div select wrapper-->
