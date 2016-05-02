@@ -10,6 +10,7 @@
 						<li><a href="<?php echo base_url();?>index.php/doc/ver">ver Doctor</a></li>
 						<li><a href="<?php echo base_url();?>index.php/Doctor/ver_horario">Horario</a></li>
 						<li><a href="<?php echo base_url();?>index.php/cita/nuevo">Crear cita</a></li>
+						<li><a href="<?php echo base_url();?>index.php/cita/buscar_paciente">ver cita</a></li>
 					</ul>
 				</nav>
 			</header>

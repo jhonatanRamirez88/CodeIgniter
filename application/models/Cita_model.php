@@ -25,10 +25,16 @@ class Cita_Model extends CI_Model{
 		$res = $this->db->query($sql);
 	}
 
+	public function citas_usu($data){
+		$sql = "Select * from cita where cve_usu = ".$data['doc'].";";
+		$res = $this->db->query($sql);
+		return $res->result_array();
+	}
+
 
 	public function eliminar_cita($data){
 		//estoy en la parte de eliminacionnn
-		$sql = "delete from cita where cve=;";
+		$sql = "delete from cita where cve=".$data['cve'].";";
 		$res = $this->db->query($sql);
 	}
 
