@@ -47,6 +47,7 @@ public function view($titulo = 'home', $arg)
 			'doc' => $this->input->post('doctor'),
 			'dia' => $this->input->post('dia'),			
 		);	
+		var_dump($data);
 		$arg['horas']=$this->dia_model->horario_dia($data);
 		$arg['pac']=$this->paciente_model->todo($data);
 		$arg['ocu']=$this->cita_model->horas_ocupadas($data);
@@ -60,15 +61,17 @@ public function view($titulo = 'home', $arg)
 
 	//insercion de la cita
 	public function recibirVerNuevo(){
+//nombre(cve_doc),hini,hfin,doctor(cve_pac),hora_cita
+//cve_doc, cve_usu, tcita,fecha,hora,nvo
 		$data = array(
-			'nom' => $this->input->post('nom'),
-			'appat' => $this->input->post('appat'),
-			'apmat' => $this->input->post('apmat'),
-			'telpar' => $this->input->post('telpar')
+			'cve_doc' => $this->input->post('cvedoc'),
+			'cve_usu' => $this->input->post('doctor'),
+			'hora' => $this->input->post('hora_cita'),
+			//'fecha' => $this->input->post('fecha')
 		);
-	
-		$cveUsu = $this->usuario_model->insert_usuario($data);
-		
+	print_r($data);
+		$cveUsu = $this->cita_model->insert_cita($data);
+		/*
     	foreach($cveUsu as $cve) {
         	$cveUsu = $cve['cve'];//Reuso la variable antes era un arreglo, en este paso solo tiene la cve
         	break;
@@ -78,11 +81,11 @@ public function view($titulo = 'home', $arg)
 			'usuk' => $cveUsu,
 			'espk' => $this->input->post('esp')
 			);
-		$cveDoc = $this->doctor_model->insert_doctor($data1);
+		$cveDoc = $this->_model->insert_doctor($data1);
     	foreach($cveDoc as $cve) {
         	$cveDoc = $cve['cve'];//Reuso la variable antes era un arreglo, en este paso solo tiene la cve
         	break;
-    	}
+    	}*/
 		redirect(base_url("index.php/cita/nuevo"));
 	}
 

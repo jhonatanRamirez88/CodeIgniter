@@ -2,11 +2,19 @@
 <section>
 
 	<form method="POST" action="<?php echo base_url(); ?>index.php/Cita/RecibirVerNuevo">						
+			<div class="4u 12u$(xsmall)">
+			<?php foreach ($horas as $doc): ?>
+				<input name="cvedoc" type="hidden" value="<?php echo $doc['cdoc']; ?>"/>
+				<?php endforeach; ?>	
+			</div>
+
+
 			<div class="row uniform 50%">
 				<div class="4u 12u$(xsmall)">
 					Nombre del doctor:					
 					<?php foreach ($horas as $doc): ?>
-						<label name="nombre" value="<?php echo $doc['cdoc']?>"><?php echo $doc['nom']?> <?php echo $doc['appat']?></label>
+						<label name="nombre" value="<?php $doc['cdoc']?>"><?php echo $doc['nom']?> <?php echo $doc['appat']?></label>
+						<?php echo $doc['cdoc'] ;?>
 					<?php endforeach; ?>					
 				</div>		
 			</div>
@@ -16,7 +24,7 @@
 				<div class="4u 12u$(xsmall)">
 					Hora inicio de consultas:					
 					<?php foreach ($horas as $doc): ?>
-						<label name="hini" value=""> <?php $ini = $doc['hini'] ?>  <?php echo $doc['hini']?></label>
+						<label name="hini" value="<?php echo $doc['hini']?>"> <?php $ini = $doc['hini'] ?>  <?php echo $doc['hini']?></label>
 					<?php endforeach; ?>					
 				</div>		
 			</div>
@@ -25,10 +33,11 @@
 				<div class="4u 12u$(xsmall)">
 					Hora fin de consultas:					
 					<?php foreach ($horas as $doc): ?>
-						<label name="hfin" value=""> <?php $fin = $doc['hfin'] ?>   <?php echo $doc['hfin']?></label>
+						<label name="hfin" value="<?php echo $doc['hfin']?>"> <?php $fin = $doc['hfin'] ?>   <?php echo $doc['hfin']?></label>
 					<?php endforeach; ?>					
 				</div>		
 			</div>
+
 
 
 			<div class="row uniform 50%">
@@ -37,12 +46,22 @@
 					<div class="select-wrapper">
 						<select name="doctor" >
 						<option value=""></option>
-						<?php foreach ($pac as $doc): ?>
+						<?php foreach ($pac as $doc):  ?>
 							<option class="valor" value="<?php echo $doc['cve']?>"><?php echo $doc['nombre']?> <?php echo $doc['appat']?></option>
 						<?php endforeach; ?>			
 						</select>
 					</div><!-- termina el div select wrapper-->
 				</div>
+			</div>
+
+
+<div class="row uniform 50%">
+				<div class="4u 12u$(xsmall)">
+					Seleccione fecha:					
+					<?php foreach ($horas as $doc): ?>
+						<label name="hini" value="<?php echo $doc['hini']?>"> <?php $ini = $doc['hini'] ?>  <?php echo $doc['hini']?></label>
+					<?php endforeach; ?>					
+				</div>		
 			</div>
 
 
@@ -101,8 +120,8 @@ foreach($arreglo as $key => $value){
 					<div class="select-wrapper">
 						<select name="hora_cita" >
 						<option value=""></option>
-						<?php foreach ($disponible as $doc): ?>
-							<option class="valor" value=""><?php echo $doc.':00:00'?></option>
+						<?php foreach ($disponible as $doc => $value): ?>
+							<option class="valor" value="<?php echo $value.':00:00' ?>"><?php echo $value.':00:00'?></option>
 						<?php endforeach; ?>			
 						</select>
 					</div><!-- termina el div select wrapper-->

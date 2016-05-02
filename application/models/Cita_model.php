@@ -19,6 +19,18 @@ class Cita_Model extends CI_Model{
 		return $gethoras->result_array();
 	}
 
+	public function insert_cita($data){
+		//nombre(cve_doc),hini,hfin,doctor(cve_pac),hora_cita,".$data['hora']."
+		$sql = "insert into cita (cve_doc, cve_usu, cve_tcita,fecha,hora,nvo) values (".$data['cve_doc'].",".$data['cve_usu'].",1,'2016-04-02','".$data['hora']."',true);";
+		$res = $this->db->query($sql);
+	}
+
+
+	public function eliminar_cita($data){
+		//estoy en la parte de eliminacionnn
+		$sql = "delete from cita where cve=;";
+		$res = $this->db->query($sql);
+	}
 
 
 }
