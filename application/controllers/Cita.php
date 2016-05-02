@@ -58,7 +58,31 @@ public function view($titulo = 'home', $arg)
 
 
 
+	function buscar_paciente(){
+		$encabe = 'Nueva cita.';
+		$arg['page'] = 'cita/buscar_1';
+		$arg['usuario']=$this->paciente_model->todo();
+		$this->view($encabe, $arg);
+		
+	}
 
+	function citas_2(){
+		$encabe = 'Consulta citas de paciente';
+		$data = array(
+			'doc' => $this->input->post('doctor'),
+		);
+
+		$arg['cveusua'] = $this->input->post('doctor');
+		$arg['page'] = 'cita/buscar_2';
+		$arg['citas']=$this->cita_model->citas_usu($data);//citas=>cve_doc,cve_usu,cve_tcita,fecha,hora,nvo,cve//
+		$this->view($encabe, $arg);		
+	}
+
+	function decit($var2){
+		$data = array('cve'=> urldecode($var2));
+		$this->cita_model->eliminar_cita($data);
+		redirect(base_url("index.php/cita/buscar_paciente"));
+	}
 
 	//insercion de la cita
 	public function recibirVerNuevo(){

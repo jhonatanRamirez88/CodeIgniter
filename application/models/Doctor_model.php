@@ -39,5 +39,7 @@ class Doctor_model extends CI_Model {
 		$res = $this->db->query($sql);
 		return $res->result_array();		
 	}	
+
+	
 }
 ?>
