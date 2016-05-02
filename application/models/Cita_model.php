@@ -13,6 +13,11 @@ class Cita_Model extends CI_Model{
 		return $getdia->result_array();
 	}
 
+	public function horas_ocupadas($data){
+		$sql = "Select hora from cita ";
+		$gethoras=$this->db->query($sql);
+		return $gethoras->result_array();
+	}
 
 
 

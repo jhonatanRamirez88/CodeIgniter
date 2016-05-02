@@ -47,8 +47,9 @@ public function view($titulo = 'home', $arg)
 			'doc' => $this->input->post('doctor'),
 			'dia' => $this->input->post('dia'),			
 		);	
-		var_dump($data);
 		$arg['horas']=$this->dia_model->horario_dia($data);
+		$arg['pac']=$this->paciente_model->todo($data);
+		$arg['ocu']=$this->cita_model->horas_ocupadas($data);
 		$this->view($encabe, $arg);
 		
 	}
