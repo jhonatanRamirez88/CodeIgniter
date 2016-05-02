@@ -1,7 +1,7 @@
 <head> <h1>Cita de pasciente</h1></head>
 <section>
 
-	<form method="POST" action="<?php echo base_url(); ?>index.php/Paciente/verNuevo">						
+	<form method="POST" action="<?php echo base_url(); ?>index.php/Cita/RecibirVerNuevo">						
 			<div class="row uniform 50%">
 				<div class="4u 12u$(xsmall)">
 					Nombre del doctor:					
@@ -100,8 +100,10 @@ for ( $i = (int)$ini; $i < (int)$fin; $i+=1)
 
 
 foreach ($ocu as $var => $value) {
-	 $modificado[$var+11] = (int)$value['hora'];//nos dice los dias ocupados
+	 $modificado[(int)$value['hora']] = (int)$value['hora'];//nos dice los dias ocupados
 }
+
+print_r($modificado);
 
 foreach($arreglo as $key => $value){//arreglo tiene los dias completos 
   if(!isset($modificado[$key])){
@@ -115,6 +117,8 @@ foreach($arreglo as $key => $value){
        $disponible[$key] = $value; //horas disponibles que mostrare en el combobox
   }
 }
+print_r($disponible);
+
 
 ?>
 
