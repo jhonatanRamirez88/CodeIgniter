@@ -13,11 +13,19 @@ class Cita_Model extends CI_Model{
 		return $getdia->result_array();
 	}
 
-	public function horas_ocupadas($data){
-		$sql = "Select hora from cita ";
+	public function horas_ocupadas($data){//hora from cita
+		$sql = "Select hora from cita where cve_doc =".$data['doc']." and fecha = ".$data['fecha']."";
 		$gethoras=$this->db->query($sql);
 		return $gethoras->result_array();
 	}
+
+
+	public function todo($data){
+		$sql = "select cita.cve as cve,doctor.cve_usu as cdoc,usuario.nombre as nombre,cita.hora as hora,cita.fecha as fecha from cita,doctor,usuario where cita.cve_doc=doctor.cve and usuario.cve=doctor.cve_usu and cita.cve_usu=".$data['doc'].";";
+		$gethoras=$this->db->query($sql);
+		return $gethoras->result_array();
+	}
+
 
 	public function insert_cita($data){
 		//nombre(cve_doc),hini,hfin,doctor(cve_pac),hora_cita,".$data['hora']."

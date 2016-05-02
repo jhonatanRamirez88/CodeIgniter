@@ -47,11 +47,10 @@ public function view($titulo = 'home', $arg)
 			'doc' => $this->input->post('doctor'),
 			'dia' => $this->input->post('dia'),			
 		);	
-		$arg['horas']=$this->dia_model->horario_dia($data);
-		$arg['pac']=$this->paciente_model->todo($data);
-		$arg['ocu']=$this->cita_model->horas_ocupadas($data);
-		$this->view($encabe, $arg);
-		
+		$arg['horas']=$this->dia_model->horario_dia($data);// cdoc, hini, hfin, nom(usuario), apppat, apmat //le enviamos en data el cve_doc y el cve_dia
+		$arg['pac']=$this->paciente_model->todo($data); //cve(cveusu),nombre(nombre usu), ap_paterno,ap_materno order by cve
+		$arg['ocu']=$this->cita_model->horas_ocupadas($data);//hora from cita
+		$this->view($encabe, $arg);		
 	}
 
 
@@ -59,7 +58,7 @@ public function view($titulo = 'home', $arg)
 	function buscar_paciente(){
 		$encabe = 'Nueva cita.';
 		$arg['page'] = 'cita/buscar_1';
-		$arg['usuario']=$this->paciente_model->todo();
+		$arg['usuario']=$this->paciente_model->todo();//cve(cveusu),nombre(nombre usu), ap_paterno,ap_materno order by cve
 		$this->view($encabe, $arg);
 		
 	}
@@ -86,14 +85,15 @@ public function view($titulo = 'home', $arg)
 	/*
 	recibe la clave que se va a consultar y llenar la vista update
 	*/
-	public function verUpdateConsulta($cve){
+	public function verUpdateCita($cve){
 		$data = array(
 			'cve' => $cve
 			);
 		$encabe = 'Modificar Cita';
 		$arg['page'] = 'cita/up_cit';
+		$arg['cita'] = $this->cita_model->todo($data);
 		$arg['pollos'] = $this->especialidad_model->getLicenciaturas();
-		$arg['datos'] = $this->usuario_model->get_inner_usuario($data);
+		$arg['datos'] = $this->cita_model->get_inner_usuario($data);
 		$this->view($encabe,$arg);
 	}
 	public function executeUpdate(){

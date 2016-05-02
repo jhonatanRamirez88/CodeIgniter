@@ -27,14 +27,7 @@
 			<div class="row uniform 50%">
 				<div class="4u 12u$(xsmall)">
 				Selecciona el día
-					<div class="select-wrapper">
-						<select name="dia" >
-						<option value=""></option>
-						<?php foreach ($cita as $doc): ?>
-							<option class="valor" value="<?php echo $doc['cve']?>"><?php echo $doc['descripcion']?></option>
-						<?php endforeach; ?>			
-						</select>
-					</div><!-- termina el div select wrapper-->
+					<input ></input>
 				</div>
 
 

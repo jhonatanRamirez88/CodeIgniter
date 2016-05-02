@@ -9,7 +9,7 @@ class Paciente_Model extends CI_Model{
 		$this->db->query($sql);
 	}
 
-	public function todo(){//cve(cveusu,nombre(nombre usu), ap_paterno,ap_materno order by cve)
+	public function todo(){//cve(cveusu),nombre(nombre usu), ap_paterno,ap_materno order by cve
 		$sql = "Select usuario.cve AS cve, usuario.nombre As nombre, usuario.ap_paterno As appat, usuario.ap_materno AS apmat from paciente inner join usuario on paciente.cve_usu = usuario.cve order by usuario.cve;";
 		$getpac = $this->db->query($sql);
 		return $getpac->result_array();
