@@ -51,6 +51,9 @@ public function view($titulo = 'home', $arg)
 		$arg['pac']=$this->paciente_model->todo($data); //cve(cveusu),nombre(nombre usu), ap_paterno,ap_materno order by cve
 		$arg['ocu']=$this->cita_model->horas_ocupadas($data);//hora from cita
 		$this->view($encabe, $arg);		
+		//var_dump($arg['ocu']);
+		$this->view($encabe, $arg);
+		
 	}
 
 
@@ -118,7 +121,12 @@ public function view($titulo = 'home', $arg)
 		$data = array(
 			'cve_doc' => $this->input->post('cvedoc'),
 			'cve_usu' => $this->input->post('doctor'),
+
 			'hora' => $this->input->post('hora_cita'),
+
+			'dia' => $this->input->post('dia_cita'),
+			'hora' => $this->input->post('hora_cita')
+
 		);
 		$cveUsu = $this->cita_model->insert_cita($data);
 		redirect(base_url("index.php/cita/nuevo"));

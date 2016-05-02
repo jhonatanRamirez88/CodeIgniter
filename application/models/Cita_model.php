@@ -16,7 +16,10 @@ class Cita_Model extends CI_Model{
 	public function horas_ocupadas($data){//hora from cita
 		$sql = "Select hora from cita where cve_doc =".$data['doc']." and fecha = ".$data['fecha']."";
 		$gethoras=$this->db->query($sql);
-		return $gethoras->result_array();
+		if ($gethoras->num_rows() > 0){
+			return $gethoras->result_array();	
+		}
+		return FALSE;		
 	}
 
 
@@ -28,8 +31,7 @@ class Cita_Model extends CI_Model{
 
 
 	public function insert_cita($data){
-		//nombre(cve_doc),hini,hfin,doctor(cve_pac),hora_cita,".$data['hora']."
-		$sql = "insert into cita (cve_doc, cve_usu, cve_tcita,fecha,hora,nvo) values (".$data['cve_doc'].",".$data['cve_usu'].",1,'2016-04-02','".$data['hora']."',true);";
+		$sql = "insert into cita (cve_doc, cve_usu, cve_tcita,fecha,hora,nvo) values (".$data['cve_doc'].",".$data['cve_usu'].",1,'".$data['dia']."','".$data['hora']."',true);";
 		$res = $this->db->query($sql);
 	}
 
