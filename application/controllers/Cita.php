@@ -95,20 +95,18 @@ public function view($titulo = 'home', $arg)
 		$arg['page'] = 'cita/up_cita';
 		$arg['cita'] = $this->cita_model->get_cita_cve($data);//Contenido de esa cita
 		$arg['docs'] = $this->doctor_model->get_all();
+		$arg['cve_cita'] = $cve;
 		$this->view($encabe,$arg);
 		
 	}
 	public function executeUpdate(){
 		$data = array(
-			'nom' => $this->input->post('nom'),
-			'appat' => $this->input->post('appat'),
-			'apmat' => $this->input->post('apmat'),
-			'telpar' => $this->input->post('telpar'),
-			'telmov' => $this->input->post('telmov'),
-			'esp' => $this->input->post('esp'),
-			'vigencia' => $this->input->post('vigencia'),
-			'cve_usu' => $this->input->post('cve_doc'),
+			'cve_cita' => $this->input->post('cita'),
+			'cve_doc' => $this->input->post('doctor'),
+			'hora' => $this->input->post('hora'),
+			'fecha' => $this->input->post('fecha')
 		);
+		//var_dump($data);
 		$this->cita_model->update_cita($data);
 		redirect(base_url("index.php/cita/buscar_paciente"));	
 	}

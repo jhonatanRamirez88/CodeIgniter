@@ -53,13 +53,11 @@ class Cita_Model extends CI_Model{
 	public function eliminar_cita($data){
 		//estoy en la parte de eliminacionnn
 		$sql = "delete from cita where cve=".$data['cve'].";";
-		$res = $this->db->query($sql);
+		$res = $this->db->query($sql);																								
 	}
 
 	public function update_cita($data){
-		$sql = "UPDATE usuario set nombre='".$data['nom']."', ap_paterno='".$data['appat']."', ap_materno='".$data['apmat']."' ,telefono_particular='".$data['telpar']."' where cve= (SELECT cve_usu FROM doctor WHERE cve=".$data['cve_usu'].")";		
-		$this->db->query($sql);
-		$sql = "UPDATE doctor set telefono_movil='".$data['telmov']."', cve_esp='".$data['esp']."', cve_vigencia='".$data['vigencia']."' where cve='".$data['cve_usu']."'";		
+		$sql = "UPDATE cita SET (cve_doc, fecha, hora)=(".$data['cve_doc'].",'".$data['fecha']."','".$data['hora']."') where cve = ".$data['cve_cita'];
 		$this->db->query($sql);
 	}
 

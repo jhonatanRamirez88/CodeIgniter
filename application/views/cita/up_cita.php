@@ -2,9 +2,9 @@
 	<h1><?php echo $title; 
 		?></h1>		
 
-	<form method="POST" action="<?php echo base_url(); ?>index.php/cita/executeUpdate">
+	<form method="POST" action="<?php echo base_url(); ?>index.php/Cita/executeUpdate">
 		<div class="row uniform 50%">
-			<input type="hidden"></input>
+			<input type="hidden" name="cita" value="<?php echo $cve_cita ?>"/>
 			<div class="4u 12u$(xsmall)">
 				Doctor:
 				<div class="select-wrapper">
@@ -19,7 +19,7 @@
 
 			<div class="4u 12u$(xsmall)">
 				Fecha:	
-				<input type="date" step="1" min="<?php  date_default_timezone_set ( "America/Mexico_City" ); echo date('Y-m-d'); ?>" id="fecha" value="<?php echo $cita['fecha'] ?>" readonly></input>
+				<input name="fecha" type="date" step="1" min="<?php  date_default_timezone_set ( "America/Mexico_City" ); echo date('Y-m-d'); ?>" id="fecha" value="<?php echo $cita['fecha'] ?>" readonly></input>
 			</div>
 			
 			<div class="4u 12u$(xsmall)">
@@ -45,7 +45,6 @@
 	//Desabilitar 
 	$('#doctor').change(function (){
   		$("#fecha").attr("readonly", false);
-		$('#btn1').attr('disabled', false);
 	});
 	var coso;
 	$('#fecha').change(function (){
