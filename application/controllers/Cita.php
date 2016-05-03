@@ -144,39 +144,45 @@ public function view($titulo = 'home', $arg)
 			'dia' =>  $var
 		);
 		$vars = $this->dia_model->horario_dia($data);// cdoc, hini, hfin, nom(usuario), apppat, apmat //le enviamos en data el cve_doc y el cve_dia
-		$arw = $this->cita_model->horas_ocupadas($data);//arw:: array of rows
-		//Creamos los arreglos que se van a mostrar en las horas disponibles.
-		$ini = $vars[0]['hini'];
-
-		$fin = $vars[0]['hfin'];
-		$arreglo= array();
-		for ( $i = (int)$ini; $i < (int)$fin; $i+=1)
-		{
-			$arreglo[$i]=$i;
-		}//fin del for
-		if($arw == FALSE){
-			$disponible = $arreglo;
+		//SI $VARS = FALSE, no tiene ningun valor asociado en ese dia.
+		if($vars == FALSE){
+			array_push($data, FALSE);
 		}else{
-			foreach ($arw as $var => $value) {
-				 $modificado[(int)$value['hora']] = (int)$value['hora'];//nos dice los dias ocupados
-			}
+			$arw = $this->cita_model->horas_ocupadas($data);//arw:: array of rows
+			//Creamos los arreglos que se van a mostrar en las horas disponibles.
+			$ini = $vars[0]['hini'];
+			$fin = $vars[0]['hfin'];
+			$arreglo= array();
+			$max = (int)$fin - (int)$ini;
+			$acum = (int)$ini;
+			for ( $i = 0; $i < $max; $i+=1)
+			{
+				$arreglo[$i]= $acum;
+				$acum++;
+			}//fin del for		
+			if($arw == FALSE){
+				$disponible = $arreglo;
+			}else{
+				foreach ($arw as $var => $value) {
+					 $modificado[(int)$value['hora']] = (int)$value['hora'];//nos dice los dias ocupados
+				}
 
-			foreach($arreglo as $key => $value){//arreglo tiene los dias completos 
-			  if(!isset($modificado[$key])){
-			       unset($modificado[$key]);
-			  }
-			}
-			 
-			// Si $aDatos es un array de estructura que deberia guardarse como referencia crea un nuevo array con la diferencia de valores
-			foreach($arreglo as $key => $value){
-			  if(!isset($modificado[$key])){
-			       $disponible[$key] = $value; //horas disponibles que mostrare en el combobox
-			  }
-			}
+				foreach($arreglo as $key => $value){//arreglo tiene los dias completos 
+				  if(!isset($modificado[$key])){
+				       unset($modificado[$key]);
+				  }
+				}
+				 
+				// Si $aDatos es un array de estructura que deberia guardarse como referencia crea un nuevo array con la diferencia de valores
+				foreach($arreglo as $key => $value){
+				  if(!isset($modificado[$key])){
+				       $disponible[$key] = $value; //horas disponibles que mostrare en el combobox
+				  }
+				}
 
+			}
+			array_push($data, $disponible);
 		}
-		array_push($data, $disponible);
-
 		echo json_encode($data);
 	}
 

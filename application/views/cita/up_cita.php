@@ -4,7 +4,7 @@
 
 	<form method="POST" action="<?php echo base_url(); ?>index.php/cita/executeUpdate">
 		<div class="row uniform 50%">
-
+			<input type="hidden"></input>
 			<div class="4u 12u$(xsmall)">
 				Doctor:
 				<div class="select-wrapper">
@@ -33,7 +33,7 @@
 			
 			<div class="12u 12u$(xsmall)">
 				<ul class="actions">
-					<li><input type="submit" value="Guardar" class="special" /></li>
+					<li><input type="submit" value="Guardar" class="special" id="btn1" disabled/></li>
 					<li><input type="reset" value="Limpiar" /></li>
 				</ul>		
 			</div>
@@ -45,17 +45,34 @@
 	//Desabilitar 
 	$('#doctor').change(function (){
   		$("#fecha").attr("readonly", false);
+		$('#btn1').attr('disabled', false);
 	});
-
+	var coso;
 	$('#fecha').change(function (){
 		$.ajax({
 		  method: "post",
 		  url: "<?php echo base_url();?>index.php/Cita/get_horarios_doc_fecha",
 		  data: { cvedoc: $('#doctor').val(), fecha: $('#fecha').val()}
 		}).done(function( data ) {
-			console.log(data);
 			data = JSON.parse(data);
-		    alert( "Data Saved: " + data.dia);
+			coso = data;
+			var str = "";
+			if(data[0] == false){
+				str += '<option value="">No hay horarios.</option>';
+				$('#btn1').attr('disabled', true);
+			}else{
+				for(var i = 0; i < data[0].length; i++){
+					var aux = data[0][i];
+					if(aux.length == 1){
+	 					aux = '0'+aux+":00"
+					}else{
+						aux = aux+":00"
+					}
+					str += '<option value='+aux+'>'+aux+'</option>';
+				}
+				$('#btn1').attr('disabled', false);
+			}
+			$('#hora').html(str);				
 		});  		
 	});	
 
