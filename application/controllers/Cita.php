@@ -175,11 +175,9 @@ public function view($titulo = 'home', $arg)
 			}
 
 		}
+		array_push($data, $disponible);
 
-
-		//$res = $this->cita_model->horas_ocupadas($data);
-		var_dump();
-		//echo json_encode($data);
+		echo json_encode($data);
 	}
 
 
