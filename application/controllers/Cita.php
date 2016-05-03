@@ -115,17 +115,71 @@ public function view($titulo = 'home', $arg)
 
 	public function get_horarios_doc_fecha(){
 		$edo = date_default_timezone_set ( "America/Mexico_City" );
-		$fecha = $this->input->get('fecha');
+		$fecha = $this->input->post('fecha');
 		$str = date("l", strtotime($fecha));
+		$var = 0;
+		switch ($str) {
+    		case "Monday":
+        		$var = 1;
+        		break;
+    		case "Tuesday":
+        		$var = 2;
+        		break;
+    		case "Wednesday":
+        		$var = 3;
+        		break;
+    		case "Thursday":
+        		$var = 4;
+        		break;
+    		case "Friday":
+        		$var = 5;
+        		break;
+    		case "Saturday":
+        		$var = 6;
+        		break;        		        		        		
+		}
 		$data = array(
-			'doc' => $this->input->get('cvedoc'),
+			'doc' => $this->input->post('cvedoc'),
 			'fecha' => $fecha,
-			'dia' =>  $str
+			'dia' =>  $var
 		);
-		//$resini = $this->dia_model->horario_dia($data);// cdoc, hini, hfin, nom(usuario), apppat, apmat //le enviamos en data el cve_doc y el cve_dia
+		$vars = $this->dia_model->horario_dia($data);// cdoc, hini, hfin, nom(usuario), apppat, apmat //le enviamos en data el cve_doc y el cve_dia
+		$arw = $this->cita_model->horas_ocupadas($data);//arw:: array of rows
+		//Creamos los arreglos que se van a mostrar en las horas disponibles.
+		$ini = $vars[0]['hini'];
+
+		$fin = $vars[0]['hfin'];
+		$arreglo= array();
+		for ( $i = (int)$ini; $i < (int)$fin; $i+=1)
+		{
+			$arreglo[$i]=$i;
+		}//fin del for
+		if($arw == FALSE){
+			$disponible = $arreglo;
+		}else{
+			foreach ($arw as $var => $value) {
+				 $modificado[(int)$value['hora']] = (int)$value['hora'];//nos dice los dias ocupados
+			}
+
+			foreach($arreglo as $key => $value){//arreglo tiene los dias completos 
+			  if(!isset($modificado[$key])){
+			       unset($modificado[$key]);
+			  }
+			}
+			 
+			// Si $aDatos es un array de estructura que deberia guardarse como referencia crea un nuevo array con la diferencia de valores
+			foreach($arreglo as $key => $value){
+			  if(!isset($modificado[$key])){
+			       $disponible[$key] = $value; //horas disponibles que mostrare en el combobox
+			  }
+			}
+
+		}
+
+
 		//$res = $this->cita_model->horas_ocupadas($data);
-		//var_dump($resini);
-		echo json_encode($data);
+		var_dump();
+		//echo json_encode($data);
 	}
 
 

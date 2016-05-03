@@ -49,7 +49,7 @@
 
 	$('#fecha').change(function (){
 		$.ajax({
-		  method: "GET",
+		  method: "post",
 		  url: "<?php echo base_url();?>index.php/Cita/get_horarios_doc_fecha",
 		  data: { cvedoc: $('#doctor').val(), fecha: $('#fecha').val()}
 		}).done(function( data ) {
