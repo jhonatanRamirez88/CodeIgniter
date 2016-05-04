@@ -1,5 +1,8 @@
 <head> <h1>Cita de pasciente</h1></head>
 <section>
+<? setlocale(LC_ALL,"es_ES@euro","es_ES","esp","es"); ?>
+<? $dias = array('Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo');
+$fecha = $dias[date('N', strtotime('2008-02-25'))]; ?> 
 
 	<form method="POST" action="<?php echo base_url(); ?>index.php/Cita/RecibirVerNuevo">						
 			<div class="4u 12u$(xsmall)">

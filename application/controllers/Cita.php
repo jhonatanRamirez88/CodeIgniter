@@ -44,9 +44,11 @@ public function view($titulo = 'home', $arg)
 		$encabe = 'Nueva cita.';
 		$arg['page'] = 'cita/vista_2';
 		$data = array(
-			'doc' => $this->input->post('doctor'),
-			'dia' => $this->input->post('dia'),			
+			'doc' => $this->input->post('doctor'),//cve_doc
+			'fecha' => $this->input->post('dia'),	//fecha completa
+			'dia' => $this->input->post('cve_dia'), //cve_dia			
 		);	
+		print_r($data);
 		$arg['horas']=$this->dia_model->horario_dia($data);// cdoc, hini, hfin, nom(usuario), apppat, apmat //le enviamos en data el cve_doc y el cve_dia
 		$arg['pac']=$this->paciente_model->todo($data); //cve(cveusu),nombre(nombre usu), ap_paterno,ap_materno order by cve
 		$arg['ocu']=$this->cita_model->horas_ocupadas($data);//hora from cita
@@ -70,13 +72,11 @@ public function view($titulo = 'home', $arg)
 		$data = array(
 			'doc' => $this->input->post('doctor'),
 		);
-
 		$arg['cveusua'] = $this->input->post('doctor');
 		$arg['page'] = 'cita/buscar_2';
 		$arg['citas']=$this->cita_model->citas_usu($data);//citas=>cve_doc,cve_usu,cve_tcita,fecha,hora,nvo,cve//
 		$this->view($encabe, $arg);		
 	}
-
 	function decit($var2){
 		$data = array('cve'=> urldecode($var2));
 		$this->cita_model->eliminar_cita($data);
