@@ -108,7 +108,8 @@ class Doctor extends CI_Controller {
 	public function ver_horario(){
 		$encabe = 'Horario del doctor';
 		$arg['page'] = 'doctor/add_schedule';
-		$arg['docs'] = $this->doctor_model->get_all();
+		$arg['docs'] = $this->doctor_model->get_docs_no_horario();
+		$arg['dias'] = $this->dia_model->getAll();
 		$this->view($encabe,$arg);	
 	}
 }

@@ -1,16 +1,24 @@
 <section>
 		
 	<header class="major">
-		<h2>Selecciona un doctor</h2>
-		<p>
-			<select id="opt" >
+		<h2>Horario del doctor</h2>
+			<h1>Selecciona un doctor:</h1>
+			<select id="opt">
 			<option value=""></option>
-			<?php foreach ($docs as $doc): ?>
-				<option class="valor" value="<?php echo $doc['cdoc']?>"><?php echo $doc['nom']?> <?php echo $doc['ape']?></option>
-			<?php endforeach; ?>			
+				<?php foreach ($docs as $doc): ?>
+					<option class="valor" value="<?php echo $doc['cdoc']?>"><?php echo $doc['nom']?> <?php echo $doc['ape']?></option>
+				<?php endforeach; ?>
 			</select>
-		</p>
+			<br>
+			<h1>Selecciona un dia:</h1>
+			<select id="opt1" disabled>
+				<option value=""></option>
+				<?php foreach ($dias as $dia): ?>
+					<option class="" value="<?php echo $dia['cve']?>"><?php echo $dia['descripcion']?></option>
+				<?php endforeach; ?>				
+			</select>
 	</header>
+	
 	<section id="horario" style="display: none;"><!--section.form start-->
 		<h1><?php echo $title; ?></h1>
 		<form id="fro" method="POST" action="<?php echo base_url(); ?>index.php/Horario/crear_nuevo">
@@ -30,15 +38,16 @@
 									<th>Final (max: 9 pm)</th>
 								</tr>
 							</thead>				
-							<tbody id="cpi">
+							<tbody id="rowstable">
 							</tbody>
 						</table>
 					</div>
 				</div>
+				<span></span>
 				<div class="12u 12u$(xsmall)">
 					<ul class="actions">
-						<li><input type="submit" value="Guardar" class="special asd" /></li>
-						<li><input type="reset" value="Limpiar" class="asd"/></li>
+						<li><input type="submit" value="Guardar" class="special" /></li>
+						<li><input type="reset" value="Limpiar" class=""/></li>
 					</ul>		
 				</div>
 			</div>
@@ -47,19 +56,15 @@
 </section>
 
 <script type="text/javascript">
-	/*
-	$(".clasefin").change(function (){
-  		var ide = this.id;
-  		console.log(ide);
-  	});
-  	*/
-
-	$(document).ready(function() {
-
-		$( "#opt" ).change(function () {
-			var x = $(this).find(":selected").val();
-			$('#idDoc').val(x);
-			if(x != ""){//validacion de que no sea el primer elemento.
+	
+	$( "#opt" ).change(function () {
+		//console.log('holo');
+		var x = $(this).find(":selected").val();
+		$('#idDoc').val(x);//Cambiamos el valor del hidden para mandarlo en el usuario.
+		if(x != ""){//validacion de que no sea el primer elemento.
+			$('#opt1').attr('disabled',false);
+				
+				/*
 				$.ajax({
 				  method: "GET",
 				  url: "<?php echo base_url();?>index.php/Horario/get_horario_cve",
@@ -80,140 +85,70 @@
 				}).fail(function() {
 	    			console.log( "error" );
 	  			});			
-			}else{
-				$('#horario').hide();
-				$('#cpi').html("");
-			}
-
-	  	});	
-    });
-
-  	function vals(){
-  		var dis = ["lunes", "martes", "miercoles","jueves","viernes","sabado"];
-  		var str = "";
-  		for (var i = 0; i < dis.length; i++) {
-			str += "<tr id="+(i+1)+">"
-			str += "<td>"+dis[i]+"</td>"
-			str += '<td>';
-			str += '<input class="" name="ini_'+(i+1)+'" id="ini_'+(i+1)+'" type="time" min="09:00" max="20:00" value="09:00" requiered readonly>';
-			str += '<a class="button small" onclick="setSiguiente('+(i+1)+');">Ok</a>';
-			str += '</td>';
-			str += '<td><input name="fin_'+(i+1)+'" id="fin_'+(i+1)+'" type="time" min="10:00" max="21:00" readonly value="10:00" requiered>'
-			str += '<a class="button small" onclick="guardar('+(i+1)+');">Ok</a>';
-			str += '</td>';
-			str += "</tr>";  
-  		}
-  		$('#cpi').html(str);
-  		$('#horario').show();
-  	}
-  	function setSiguiente(val){
-  		var vl = $('#ini_'+val).val();
-  		var arg = vl.split(':');
-  		var d = new Date();
-  		d.setHours(arg[0]);
-  		d.setMinutes(arg[1]);
-  		d.setSeconds(00);
-  		var edo = true;
-  		if(d.getHours() > 20 || d.getHours() < 9){
-  			edo = false;
-  			$('#ini_'+val).css("border-color", "red");
-  		}else{
-  			$('#ini_'+val).css("border-color", "green");
-  		}
-  		//lemagregamos una hora al input:time#fin
-  		var daux = d;
-  		d.setHours(d.getHours() + 1);
-  		//Cambiamos la hora que muestra
-  		var str = d.toLocaleTimeString();
-  		if(str.length == 7){
-  			str = '0'+str;
-  		}
-  		$('#fin_'+val).attr('min', str);//modificamos el minimo que puede elegir en el fin de hora
-  		$('#fin_'+val).val(str);//Modificamos el contenido a visulizar
-  		if(edo){//desabilitar el sig hora
-  			var str = 'fin_'+val;
-  			$("#"+str).attr("readonly", false);
-  		}else{
-  			var str = 'fin_'+val;
-  			$("#"+str).attr("readonly", true);  			
-  			alert("Hora de inicio no valida.");
-  		}
-
-  	}
-  	function guardar(val){
-  		var vl = $('#fin_'+val).val();
-  		var arg = vl.split(':');
-  		var dfin = new Date();
-  		dfin.setHours(arg[0]);
-  		dfin.setMinutes(arg[1]);
-  		dfin.setSeconds(00);
-
-  		vl = $('#ini_'+val).val();
-  		arg = vl.split(':');
-  		var dini = new Date();
-  		dini.setHours(arg[0]);
-  		dini.setMinutes(arg[1]);
-  		dini.setSeconds(00);  		
-
-  		if(dfin.getHours() > dini.getHours() && dfin.getHours() <= 21){
-  			$('#fin_'+val).css("border-color", "green");
-  		}else{
-  			$('#fin_'+val).css("border-color", "red");
-  		}
-  	}
-
-  	function crearHorarioExistente(data){
-  		var str ="";
-		var ind;
-		for (ind in data) {
-			var row = data[ind];//cdia, ddia, ini, fin
-			str += "<tr id="+row.cdia+" class="+"fila"+">"
-			str += "<td>"+row.ddia+"</td>"
-			str += '<td>';
-			str += '<input onclick="editarElemento(this.id)" class="clase01" name="ini_'+row.cdia+'" id="ini_'+row.cdia+'" type="time" min="09:00" max="20:00" value="'+row.ini+'" readonly>';
-			str += '</td>';
-			str += '<td><input onclick="editarElemento(this.id)" class="clasefin" name="fin_'+row.cdia+'" id="fin_'+row.cdia+'" type="time" min="10:00" max="21:00" value="'+row.fin+'" readonly>'
-			str += '</td>';
-			str += "</tr>";
+	  			*/
+		}else{
+			$('#opt1').attr('disabled',true);//desabilitamos el select
+			$('#horario').hide();//Ocultamos la tabla de horario.
+			$('#rowstable').html("");//Eliminamos las filas que tiene esa tabla
 		}
-		return str;
-  	}
+	});	
 
-	function editarElemento(ide){
-		var rea = $('#'+ide).attr("readonly");
-		if(rea == "readonly"){
-	       	$("#"+ide).attr("readonly", false);
-	       	$(".asd").show();
-	    }
-		var ini = ide.replace('fin','ini');
-	    if(ide.includes('fin')){
-	    	var bob = $('#'+ini).val();
-	    	var d = new Date();
-	    	var spt = bob.split(':');
+	$( "#opt1" ).change(function (){
+		var valopt = $(this).find(":selected").val();
+		if(valopt != ""){
+			var strdia = $(this).find(":selected").html();
+			var row = "<tr>";
+			row += "<td>"+strdia+"</td>";
+			//Hora de inicio
+			row += '<td>';
+			row += '<input class="validar ini" name="ini_'+valopt+'" id="ini_'+valopt+'" type="time" min="09:00" max="20:00" value="09:00" onchange="validarInicio('+valopt+')" requiered >';
+			row += '</td>';
+			//Hora de fin		
+			row += '<td>';
+			row += '<input class="validar fin" name="fin_'+valopt+'" id="fin_'+valopt+'" type="time" min="10:00" max="21:00" value="21:00" requiered>';
+			row += '</td>';			
+			row += "</tr>";
+			//Eliminamos la opcion seleccionada del item SELECT
+			$("#opt1 option:selected").remove();
 
-	    	d.setHours(spt[0]);
-	    	d.setMinutes(spt[1]);
-	    	d.setSeconds('00');
-	    	d.setHours(d.getHours() + 1);
-	    	bob = d.toLocaleTimeString();
-	    	console.log(bob);
-	    	if(bob.length == 7){
-	    		bob = '0'+ d.toLocaleTimeString();
-	    	}
-	    	$('#'+ide).attr("min",bob);
-	    	$('#'+ide).val(bob);
-	    }
+			$('#rowstable').append(row);
+			$('#horario').show();
 
-  	} 
-
-  	function verificaReadOnlyDesactivar(ide){
-  		var rea = $('#'+ide).attr("readonly");
-  		var edo = false;
-		if(rea == "readonly"){
-	       	$("#"+ide).attr("readonly", false);
-	       	edo = true;
-	    }
-	    return edo;
-  	}
-  	
+			if (strdia.toLowerCase() == "sabado") {//Para el dia sabado tiene diferentes horarios de atencion.
+				$('#ini_'+valopt).attr('max','13:00');
+				$('#fin_'+valopt).attr('max','14:00');
+				$('#fin_'+valopt).val('14:00');
+			}			
+		}
+	});	
+	/*Permite modificar el attr min del elemento fin*/
+	function validarInicio(num){
+		var ini = "#ini_"+num;//Id de inicio
+		var fin = "#fin_"+num;//Id de fin
+		var hr = $(ini).val();//Valor que tiene el elemento de inicio
+		var time = new Date();//Creamos una fecha
+		hr = hr.split(':');
+		num = conv(hr[0]);
+		time.setHours(num + 1);
+		time.setMinutes(0);
+		time.setSeconds(0);
+		var t = (time.toTimeString().split(" "))[0];
+		//console.log(t);
+		$(fin).attr('min', t);
+		$(fin).val(t);
+	}
+	/*Conversion de un str de hora a un int*/
+	function conv(str){
+		var num = -1;
+		if(str[0] == "0" ){
+			if(str == "00"){
+				num = 12;
+			}else{
+				num = parseInt(str[1]);
+			}
+		}else{
+			num = parseInt(str);
+		}
+		return num;
+	}
 </script>

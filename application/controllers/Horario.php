@@ -39,15 +39,21 @@ class Horario extends CI_Controller {
 	}
 	/*Creamos un nuevo horario que se asocia en la vista /Doctor/ver_horario*/
 	public function crear_nuevo(){
-		for($index = 1; $index < 7; $index += 1){//recorre del 1 al 6 por los dias
-			$data2 = array(
-				'fec_ini' => $this->input->post('ini_'.$index),
-				'fec_fin' => $this->input->post('fin_'.$index),
-				'cve_dia' => $index,
-				'doc' => $this->input->post('cvedoc')
+		var_dump($_POST);
+		foreach ($_POST as $index => $value){
+			//echo $index."=".$value."<br>";
+			if (strpos($index, 'ini') !== false) {//valor <ini> esta dentro del <$index>
+				$split= preg_split("[_]", $index);
+				$pos = $split[1];
+				$data2 = array(
+					'fec_ini' => $this->input->post('ini_'.$pos),
+					'fec_fin' => $this->input->post('fin_'.$pos),
+					'cve_dia' => $pos,
+					'doc' => $this->input->post('cvedoc')
 				);
-			$this->horario_model->insert_horario($data2);
-		}	
+				$this->horario_model->insert_horario($data2);
+			}
+		}
 		redirect(base_url("index.php/Doctor/ver_horario"));
 
 	}
