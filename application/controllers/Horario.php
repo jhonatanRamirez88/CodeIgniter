@@ -39,7 +39,7 @@ class Horario extends CI_Controller {
 	}
 	/*Creamos un nuevo horario que se asocia en la vista /Doctor/ver_horario*/
 	public function crear_nuevo(){
-		var_dump($_POST);
+		//var_dump($_POST);
 		foreach ($_POST as $index => $value){
 			//echo $index."=".$value."<br>";
 			if (strpos($index, 'ini') !== false) {//valor <ini> esta dentro del <$index>
@@ -57,13 +57,15 @@ class Horario extends CI_Controller {
 		redirect(base_url("index.php/Doctor/ver_horario"));
 
 	}
-	/*HACET UN UPDATE DEL REGSTRO DE USUARIOS*/
+	/*Ejecutar el update del horario de un doctor en especifico*/
 	public function update_horario(){
 		//Eliminamos los datos ya existentes
 		$data1 = array('doc' => $this->input->post('cvedoc'));
 		$this->horario_model->delete_horario_by_cve($data1);
-		//hacermos el insert
+		//re-insert valores del horario
 		$this->crear_nuevo();
+		redirect(base_url("index.php/Doctor/ver_update_horario"));
+		
 	}
 }
 ?>

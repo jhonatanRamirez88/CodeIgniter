@@ -37,7 +37,7 @@ class Doctor_model extends CI_Model {
 		$res = $this->db->query($sql);
 		return $res->result_array();		
 	}
-	/*Obtenemos todos los doctores que aun no tiene asociado un horario */
+	/*Obtenemos todos los doctores que aun NO tiene asociado un horario */
 	public function get_docs_no_horario(){
 		$sql = "select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve not in (select cve_doc from horario group by cve_doc)";
 		$res = $this->db->query($sql);
@@ -46,7 +46,16 @@ class Doctor_model extends CI_Model {
 		}
 		return FALSE;	
 	}
-
+	
+	/*Obtenemos todos los doctores que aun SI tiene asociado un horario */
+	public function get_docs_si_horario(){
+		$sql = "select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve in (select cve_doc from horario group by cve_doc)";
+		$res = $this->db->query($sql);
+		if ($res->num_rows() > 0){
+			return $res->result_array();	
+		}
+		return FALSE;	
+	}
 	public function get_doctor($data){
 		//$sql = "SELECT doctor.cve AS cve_doc, usuario.nombre AS nombre, usuario.ap_paterno AS apellido FROM doctor INNER JOIN usuario ON doctor.cve_usu = usuario.cve WHERE doctor.cve = ".data['cve_doc'];
 		$res = $this->db->query($sql);

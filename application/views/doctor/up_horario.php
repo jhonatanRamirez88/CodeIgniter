@@ -1,9 +1,9 @@
 <section>	
 	<header class="major">
-		<h2>Crear horario del doctor</h2>
+		<h2>Cambiar horario del doctor</h2>
 			<h1>Selecciona un doctor:</h1>
 			<select id="opt">
-			<option value=""></option>
+				<option value=""></option>
 				<?php foreach ($docs as $doc): ?>
 					<option class="valor" value="<?php echo $doc['cdoc']?>"><?php echo $doc['nom']?> <?php echo $doc['ape']?></option>
 				<?php endforeach; ?>
@@ -12,20 +12,16 @@
 			<h1>Selecciona un dia:</h1>
 			<select id="opt1" disabled>
 				<option value=""></option>
-				<?php foreach ($dias as $dia): ?>
-					<option class="" value="<?php echo $dia['cve']?>"><?php echo $dia['descripcion']?></option>
-				<?php endforeach; ?>				
 			</select>
 	</header>
 	
 	<section id="horario" style="display: none;"><!--section.form start-->
-		<h1>Horario</h1>
-		<form id="fro" method="POST" action="<?php echo base_url(); ?>index.php/Horario/crear_nuevo">
+		<form id="fro" method="POST" action="<?php echo base_url(); ?>index.php/Horario/update_horario">
 			<input type="hidden" value="" name="cvedoc" id="idDoc"></input>
 			<div class="row uniform 50%">
 				<!-- trabajando con los horarios -->
 				<div class="12u 12u$(xsmall)">
-					<h4>Horarios de atención de: </h4>
+					<h4>Actualizar horario de atención de: </h4>
 				</div>
 				<div class="12u 12u$(xsmall)">
 					<div class="table-wrapper">
@@ -46,7 +42,7 @@
 				<div class="12u 12u$(xsmall)">
 					<ul class="actions">
 						<li><input type="submit" value="Guardar" class="special" /></li>
-						<li><input type="reset" value="Limpiar" class=""/></li>
+						<li><input type="reset" value="Limpiar" class=""/></li>						
 					</ul>		
 				</div>
 			</div>
@@ -55,19 +51,38 @@
 </section>
 
 <script type="text/javascript">
-	
-	$( "#opt" ).change(function () {
-		//console.log('holo');
+	var aux = null;
+	$('#opt').change(function (){
 		var x = $(this).find(":selected").val();
 		$('#idDoc').val(x);//Cambiamos el valor del hidden para mandarlo en el usuario.
-		if(x != ""){//validacion de que no sea el primer elemento.
+		if($('#opt').val() != ""){
+			cargarTabla();
 			$('#opt1').attr('disabled',false);
+			/*Llenamos el select con los dias faltantes, usar ajax
+			mandar: this.val() =  cve del doctor,
+			*/
+			$.ajax({
+			  method: "POST",
+			  url: "<?php echo base_url();?>index.php/Doctor/dias_restantes",
+			  data: { cve: $('#opt').val()}
+			}).done(function( data ) {
+				$('#opt1').html("<option value=''></option>");
+				data = JSON.parse(data);	
+				str = "";
+				for (var i = 0; i < data.dias.length; i++) {
+					str +=  "<option value="+data.dias[i].cve+">"
+					str += data.dias[i].descripcion;
+					str += "</option>";
+				}
+				$('#opt1').append(str);
+			});
 		}else{
-			$('#opt1').attr('disabled',true);//desabilitamos el select
-			$('#horario').hide();//Ocultamos la tabla de horario.
-			$('#rowstable').html("");//Eliminamos las filas que tiene esa tabla
+			$('#opt1').html("<option value=''></option>");
+			$('#opt1').attr('disabled',true);
+			$('#rowstable').html("");
+			$('#horario').hide();
 		}
-	});	
+	});
 
 	$( "#opt1" ).change(function (){
 		var valopt = $(this).find(":selected").val();
@@ -96,7 +111,44 @@
 				$('#fin_'+valopt).val('14:00');
 			}			
 		}
-	});
+	});	
+
+	function cargarTabla(){
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url();?>index.php/Doctor/dias_registrados",
+			data: { cve: $('#opt').val()}
+		}).done(function( data ) {
+			$('#rowstable').html("");
+			data = JSON.parse(data);
+			data = data.regis;
+			var row = "";
+			for (var i = 0; i < data.length; i++) {
+				row += "<tr id='"+data[i].ddia+"'>";
+				row += "<td>"+data[i].ddia+"</td>";
+				//Hora de inicio
+				row += '<td>';
+				row += '<input class="validar ini" name="ini_'+data[i].cdia+'" id="ini_'+data[i].cdia+'" type="time" min="09:00" max="20:00" value="'+data[i].ini+'" onchange="validarInicio('+data[i].cdia+')" requiered >';
+				row += '</td>';
+				//Hora de fin		
+				row += '<td>';
+				row += '<input class="validar fin" name="fin_'+data[i].cdia+'" id="fin_'+data[i].cdia+'" type="time" min="10:00" max="21:00" value="'+data[i].fin+'" requiered>';
+				row += '<input value="Eliminar" class="btn" onclick="eliminarFila('+data[i].cdia+','+data[i].ddia+')" type="button">';
+				row += '</td>';			
+				row += "</tr>";				
+			}
+			$('#rowstable').html(row);
+			$('#horario').show();
+		});		
+	}
+	/*Eliminamos una fila de la tabla, se elimina un horario disponible y se agrega el
+	dia al SELECT#OPT1*/
+	function eliminarFila(cdia, ddia){
+		console.log(cdia + ddia);
+		//$('#'+ddia).remove();
+		//var ele = "<option value="+cdia+">"+ddia+"</option>"
+		//$('#opt1').append();
+	}
 	/*Permite modificar el attr min del elemento fin*/
 	function validarInicio(num){
 		var ini = "#ini_"+num;//Id de inicio
@@ -126,5 +178,5 @@
 			num = parseInt(str);
 		}
 		return num;
-	}
+	}	
 </script>

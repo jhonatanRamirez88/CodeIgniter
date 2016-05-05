@@ -112,5 +112,33 @@ class Doctor extends CI_Controller {
 		$arg['dias'] = $this->dia_model->getAll();
 		$this->view($encabe,$arg);	
 	}
+	/*Cargar la vista de update del horario*/
+	public function ver_update_horario(){
+		$encabe = 'Actualizar horario del doctor';
+		$arg['page'] = 'doctor/up_horario';
+		$arg['docs'] = $this->doctor_model->get_docs_si_horario();
+		$this->view($encabe,$arg);	
+	}
+
+	/*Obtener los dias restantes ajax*/
+	public function dias_restantes(){
+		$data = array(
+			'cve_doc' => $this->input->post('cve')
+			);
+		$data = $this->horario_model->get_dias_faltantes_doctor($data);
+		$data = array(
+			'dias' => $data
+			);		
+		echo json_encode($data);
+	}
+	/*Obtener los horarios de un usuario ajax*/
+	public function dias_registrados(){
+		$data = $this->input->post('cve');//cve del doctor
+		$data = $this->horario_model->get_all_by_cve($data);//array
+		$data = array( 'regis' => $data );//array
+		echo json_encode($data);
+	}	
+
+
 }
 ?>
