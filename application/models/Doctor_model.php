@@ -37,9 +37,10 @@ class Doctor_model extends CI_Model {
 		$res = $this->db->query($sql);
 		return $res->result_array();		
 	}
-	/*Obtenemos todos los doctores que aun NO tiene asociado un horario */
+	/*Obtenemos todos los doctores que aun NO tiene asociado un horario , vista dsh = doctores SIN horario*/
 	public function get_docs_no_horario(){
-		$sql = "select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve not in (select cve_doc from horario group by cve_doc)";
+		//$sql = "select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve not in (select cve_doc from horario group by cve_doc)";
+		$sql = "select * from dsh";
 		$res = $this->db->query($sql);
 		if ($res->num_rows() > 0){
 			return $res->result_array();	
@@ -47,9 +48,10 @@ class Doctor_model extends CI_Model {
 		return FALSE;	
 	}
 	
-	/*Obtenemos todos los doctores que aun SI tiene asociado un horario */
+	/*Obtenemos todos los doctores que aun SI tiene asociado un horario, vista dch = doctores con horario*/
 	public function get_docs_si_horario(){
-		$sql = "select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve in (select cve_doc from horario group by cve_doc)";
+		//$sql = "select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve in (select cve_doc from horario group by cve_doc)";
+		$sql = "select * from dch";
 		$res = $this->db->query($sql);
 		if ($res->num_rows() > 0){
 			return $res->result_array();	

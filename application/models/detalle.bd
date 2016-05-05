@@ -1,0 +1,5 @@
+//vista dsh
+create view dsh as select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve not in (select cve_doc from horario group by cve_doc);
+
+//vista dch 
+create view dch as select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve in (select cve_doc from horario group by cve_doc);
