@@ -124,6 +124,8 @@
 			data = data.regis;
 			var row = "";
 			for (var i = 0; i < data.length; i++) {
+				var d = data[i].ddia;
+				d = d.toString();
 				row += "<tr id='"+data[i].ddia+"'>";
 				row += "<td>"+data[i].ddia+"</td>";
 				//Hora de inicio
@@ -133,7 +135,7 @@
 				//Hora de fin		
 				row += '<td>';
 				row += '<input class="validar fin" name="fin_'+data[i].cdia+'" id="fin_'+data[i].cdia+'" type="time" min="10:00" max="21:00" value="'+data[i].fin+'" requiered>';
-				row += '<input value="Eliminar" class="btn" onclick="eliminarFila('+data[i].cdia+','+data[i].ddia+')" type="button">';
+				row += '<input value="Eliminar" class="btn" onclick="eliminarFila(\''+data[i].ddia+'\','+data[i].cdia+');" type="button">';
 				row += '</td>';			
 				row += "</tr>";				
 			}
@@ -143,11 +145,11 @@
 	}
 	/*Eliminamos una fila de la tabla, se elimina un horario disponible y se agrega el
 	dia al SELECT#OPT1*/
-	function eliminarFila(cdia, ddia){
-		console.log(cdia + ddia);
-		//$('#'+ddia).remove();
-		//var ele = "<option value="+cdia+">"+ddia+"</option>"
-		//$('#opt1').append();
+	function eliminarFila(ddia, cdia){
+		//console.log(cdia);
+		$('#'+ddia).remove();
+		var ele = "<option value="+cdia+">"+ddia+"</option>"
+		$('#opt1').append(ele);
 	}
 	/*Permite modificar el attr min del elemento fin*/
 	function validarInicio(num){
