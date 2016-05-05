@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			
-			<input type="text"  name="cve_dia" id="cve_dia" value="" readonly></input>
+			<input type="hidden"  name="cve_dia" id="cve_dia" value="" readonly></input>
 
 			<div class="row uniform 50%">
 						<div class="5u 12u$(xsmall)">
@@ -67,7 +67,15 @@
 				alert('No hay horarios disponibles del doctor en ese dia intente con otro dia');
 				$('#btn1').attr('disabled', true);
 			}else{
-				$('#btn1').attr('disabled', false);
+				if (data[0].lenght==0) {//si el data[0] contiene horario disponible le activo el boton
+
+					alert('Horario lleno para ese dia del doctor intente con otro dia');
+					$('#btn1').attr('disabled', true);	
+					
+				}else{//otro caso el data ==0 significa que no tiene horarios disponibles
+					$('#btn1').attr('disabled', false);	
+				}
+				
 			}
 			$('#cve_dia').html(str);	
 			document.getElementById("cve_dia").value = str;		

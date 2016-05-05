@@ -59,7 +59,8 @@ $fecha = $dias[date('N', strtotime('2008-02-25'))]; ?>
 <?php
 	/*Generamos las fechas que puede seeccionar el usuario siempre y cuando
 	coincidan con el dia seleccionado por el usuario
-	*/
+	*/$numero_dia=$cve_dia[0];
+	//var_dump($numero_dia);
 	$val_dia = NULL;
 	switch($numero_dia){
 		case 1:
@@ -86,11 +87,11 @@ $fecha = $dias[date('N', strtotime('2008-02-25'))]; ?>
 	$endDate = strtotime("+2 Month");
 	$fechas_por_dia =array();
 	for($i = strtotime($val_dia, strtotime("tomorrow")); $i <= $endDate; $i = strtotime('+1 week', $i)){
-		$fechas_por_dia[] = date('d-m-Y', $i);
+		$fechas_por_dia[] = date('Y-m-d', $i);
 	}
 ?>
 
-<div class="row uniform 50%">
+<!--			<div class="row uniform 50%">
 				<div class="4u 12u$(xsmall)">
 					Seleccione fecha:
 					<select name="dia_cita">
@@ -99,9 +100,15 @@ $fecha = $dias[date('N', strtotime('2008-02-25'))]; ?>
 					<?php endforeach; ?>					
 					</select>
 				</div>		
+			</div>-->
+
+			<div class="row uniform 50%">
+				<div class="4u 12u$(xsmall)">
+					Fecha seleccionada:				
+						<label name="dia_cita" value="<?php echo $fechacom ?>"><?php echo $fechacom ?></label>
+						<input name="dia_cita" type="hidden" value="<?php echo $fechacom ?>"/>
+				</div>		
 			</div>
-
-
 				
 
 
@@ -127,7 +134,7 @@ if($ocu == FALSE){
 	$disponible = $arreglo;
 }else{
 	foreach ($ocu as $var => $value) {
-		 $modificado[(int)$value['hora']] = (int)$value['hora'];//nos dice los dias ocupados
+		 $modificado[(int)$value['hora']] = (int)$value['hora'];//nos dice las horas 
 	}
 
 	foreach($arreglo as $key => $value){//arreglo tiene los dias completos 
@@ -135,8 +142,7 @@ if($ocu == FALSE){
 	       unset($modificado[$key]);
 	  }
 	}
-	 
-	// Si $aDatos es un array de estructura que deberia guardarse como referencia crea un nuevo array con la diferencia de valores
+	 print_r($modificado);
 	foreach($arreglo as $key => $value){
 	  if(!isset($modificado[$key])){
 	       $disponible[$key] = $value; //horas disponibles que mostrare en el combobox
@@ -144,6 +150,7 @@ if($ocu == FALSE){
 	}
 
 }
+
 
 ?>
 

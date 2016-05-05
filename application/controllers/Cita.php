@@ -48,7 +48,8 @@ public function view($titulo = 'home', $arg)
 			'fecha' => $this->input->post('dia'),	//fecha completa
 			'dia' => $this->input->post('cve_dia'), //cve_dia			
 		);	
-		print_r($data);
+		$arg['fechacom'] = $this->input->post('dia');	//fecha completa
+		$arg['cve_dia']=$this->input->post('cve_dia');
 		$arg['horas']=$this->dia_model->horario_dia($data);// cdoc, hini, hfin, nom(usuario), apppat, apmat //le enviamos en data el cve_doc y el cve_dia
 		$arg['pac']=$this->paciente_model->todo($data); //cve(cveusu),nombre(nombre usu), ap_paterno,ap_materno order by cve
 		$arg['ocu']=$this->cita_model->horas_ocupadas($data);//hora from cita
@@ -191,13 +192,11 @@ public function view($titulo = 'home', $arg)
 		$data = array(
 			'cve_doc' => $this->input->post('cvedoc'),
 			'cve_usu' => $this->input->post('doctor'),
-
 			'hora' => $this->input->post('hora_cita'),
-
 			'dia' => $this->input->post('dia_cita'),
-			'hora' => $this->input->post('hora_cita')
-
+			'hora' => $this->input->post('hora_cita'),
 		);
+		
 		$cveUsu = $this->cita_model->insert_cita($data);
 		redirect(base_url("index.php/cita/nuevo"));
 	}
