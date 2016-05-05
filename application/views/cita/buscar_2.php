@@ -38,7 +38,7 @@
 	}
 	function alertDelete(cve){
 	    if (confirm("¿Desas hacer eliminar este campo?") == true) {
-	        location.href="<?php echo base_url();?>index.php/Doctor/delete_doctor/"+cve;
+	        location.href="<?php echo base_url();?>index.php/Cita/decit/"+cve;
 	    }
 	}
 </script>
