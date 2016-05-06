@@ -142,7 +142,7 @@ if($ocu == FALSE){
 	       unset($modificado[$key]);
 	  }
 	}
-	 print_r($modificado);
+	//print_r($modificado);
 	foreach($arreglo as $key => $value){
 	  if(!isset($modificado[$key])){
 	       $disponible[$key] = $value; //horas disponibles que mostrare en el combobox

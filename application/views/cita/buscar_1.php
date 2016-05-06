@@ -6,7 +6,7 @@
 				<div class="4u 12u$(xsmall)">
 				Selecciona un paciente:
 					<div class="select-wrapper">
-						<select name="doctor" >
+						<select name="paciente" >
 						<option value=""></option>
 						<?php foreach ($usuario as $doc):  ?>
 							<option class="valor" value="<?php echo $doc['cve']?>"><?php echo $doc['nombre']?> <?php echo $doc['appat']?></option>

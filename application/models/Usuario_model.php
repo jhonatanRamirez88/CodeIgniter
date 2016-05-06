@@ -21,5 +21,10 @@ class Usuario_model extends CI_Model {
 		$getusu = $this->db->query($sql);
 		return $getusu->row_array();	
 	}
+	public function get_user_by_cve($data){
+		$sql = "select * from usuario where cve = ".$data;
+		$getusu = $this->db->query($sql);
+		return $getusu->row_array();			
+	}
 }
 ?>

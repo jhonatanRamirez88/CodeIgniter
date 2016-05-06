@@ -13,13 +13,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php //citas=>cve_doc,cve_usu,cve_tcita,fecha,hora,nvo,cve//
-				$indice = 0;
-				foreach ($citas as $item ): 
-				?>
+			<?php $indice = 0; foreach ($citas as $item): ?>
 				<tr id="row<?php echo $item['cve']; ?>">
 					<td><?php echo $indice+=1; ?></td>
-					<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['nombre']; ?> </td>
+					<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['nombre']." ".$item['apellido']; ?> </td>
 					<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['fecha']; ?> </td>
 					<td id="tddesc<?php echo $item['cve']; ?>"><?php echo $item['hora']; ?></td>
 					<td id="btnRe<?php echo $item['cve']; ?>">

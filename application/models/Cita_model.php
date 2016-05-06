@@ -44,7 +44,7 @@ class Cita_Model extends CI_Model{
 	}
 
 	public function citas_usu($data){
-		$sql = "select cita.cve as cve,doctor.cve_usu as cdoc,usuario.nombre as nombre,cita.hora as hora,cita.fecha as fecha from cita,doctor,usuario where cita.cve_doc=doctor.cve and usuario.cve=doctor.cve_usu and cita.cve_usu=".$data['doc'].";";
+		$sql = "select cita.cve as cve,doctor.cve_usu as cdoc,usuario.nombre as nombre, usuario.ap_paterno AS apellido,cita.hora as hora,cita.fecha as fecha from cita,doctor,usuario where cita.cve_doc=doctor.cve and usuario.cve=doctor.cve_usu and cita.cve_usu=".$data['doc'].";";
 		$res = $this->db->query($sql);
 		return $res->result_array();
 	}
@@ -57,6 +57,7 @@ class Cita_Model extends CI_Model{
 	}
 
 	public function update_cita($data){
+		var_dump($data);
 		$sql = "UPDATE cita SET (cve_doc, fecha, hora)=(".$data['cve_doc'].",'".$data['fecha']."','".$data['hora']."') where cve = ".$data['cve_cita'];
 		$this->db->query($sql);
 	}

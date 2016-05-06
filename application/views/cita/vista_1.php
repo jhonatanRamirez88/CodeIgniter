@@ -27,6 +27,7 @@
 			<div class="row uniform 50%">
 				<div class="4u 12u$(xsmall)">
 				Selecciona el día
+					<?php 		$edo = date_default_timezone_set ( "America/Mexico_City" ); ?>
 					<input type="date" id ="fecha" name="dia" step="1" onclick="<?php $i = date("Y-m-d"); ?>;" min="<?php echo date("Y-m-d");?>" max="2018-12-31" value="<?php echo date("Y-m-d");?>">
 				</div>
 			</div>
@@ -68,10 +69,8 @@
 				$('#btn1').attr('disabled', true);
 			}else{
 				if (data[0].lenght==0) {//si el data[0] contiene horario disponible le activo el boton
-
 					alert('Horario lleno para ese dia del doctor intente con otro dia');
 					$('#btn1').attr('disabled', true);	
-					
 				}else{//otro caso el data ==0 significa que no tiene horarios disponibles
 					$('#btn1').attr('disabled', false);	
 				}

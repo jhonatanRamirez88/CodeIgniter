@@ -32,8 +32,7 @@ public function view($titulo = 'home', $arg)
 	function nuevo(){
 		$encabe = 'Nueva cita.';
 		$arg['page'] = 'cita/vista_1';
-		$arg['pollo'] = $this->doctor_model->get_all();
-		$arg['cita'] = $this->cita_model->get_all();
+		$arg['pollo'] = $this->doctor_model->get_docs_si_horario();
 		//$arg['paciente'] = $this->paciente_model->todo();//obtengo cve, nombre, appat, apmat
 
 		$this->view($encabe, $arg);
@@ -71,13 +70,14 @@ public function view($titulo = 'home', $arg)
 	function citas_2(){
 		$encabe = 'Consulta citas de paciente';
 		$data = array(
-			'doc' => $this->input->post('doctor'),
+			'doc' => $this->input->post('paciente'),
 		);
-		$arg['cveusua'] = $this->input->post('doctor');
+		$arg['cveusua'] = $this->input->post('paciente');
 		$arg['page'] = 'cita/buscar_2';
 		$arg['citas']=$this->cita_model->citas_usu($data);//citas=>cve_doc,cve_usu,cve_tcita,fecha,hora,nvo,cve//
 		$this->view($encabe, $arg);		
 	}
+
 	function decit($var2){
 		$data = array('cve'=> urldecode($var2));
 		$this->cita_model->eliminar_cita($data);
@@ -95,7 +95,8 @@ public function view($titulo = 'home', $arg)
 		$encabe = 'Modificar Cita';
 		$arg['page'] = 'cita/up_cita';
 		$arg['cita'] = $this->cita_model->get_cita_cve($data);//Contenido de esa cita
-		$arg['docs'] = $this->doctor_model->get_all();
+		$arg['pacientedatos'] = $this->usuario_model->get_user_by_cve($arg['cita']['cve_usu']);		
+		$arg['docs'] = $this->doctor_model->get_docs_si_horario();
 		$arg['cve_cita'] = $cve;
 		$this->view($encabe,$arg);
 		
@@ -143,10 +144,11 @@ public function view($titulo = 'home', $arg)
 			'dia' =>  $var
 		);
 		$vars = $this->dia_model->horario_dia($data);// cdoc, hini, hfin, nom(usuario), apppat, apmat //le enviamos en data el cve_doc y el cve_dia
-		//SI $VARS = FALSE, no tiene ningun valor asociado en ese dia.
+		//SI $VARS = FALSE, no tiene ningun valor el doctor no tiene horario de atencion en ese dia..
 		if($vars == FALSE){
 			array_push($data, FALSE);
 		}else{
+			//Pedimos todos los horarios que tiene ocupados dicho doctor con dicha fecha
 			$arw = $this->cita_model->horas_ocupadas($data);//arw:: array of rows
 			//Creamos los arreglos que se van a mostrar en las horas disponibles.
 			$ini = $vars[0]['hini'];
@@ -156,29 +158,31 @@ public function view($titulo = 'home', $arg)
 			$acum = (int)$ini;
 			for ( $i = 0; $i < $max; $i+=1)
 			{
-				$arreglo[$i]= $acum;
+				$arreglo[$i] = $acum;
 				$acum++;
 			}//fin del for		
 			if($arw == FALSE){
-				$disponible = $arreglo;
+				$disponible = $arreglo;//Todas las horas disponibles
 			}else{
+				$index = 0;
 				foreach ($arw as $var => $value) {
-					 $modificado[(int)$value['hora']] = (int)$value['hora'];//nos dice los dias ocupados
+					$modificado[$index] = (int)$value['hora'];//nos dice los dias ocupados
+					$index++;
 				}
 
 				foreach($arreglo as $key => $value){//arreglo tiene los dias completos 
 				  if(!isset($modificado[$key])){
 				       unset($modificado[$key]);
 				  }
-				}
-				 
+				}	 
 				// Si $aDatos es un array de estructura que deberia guardarse como referencia crea un nuevo array con la diferencia de valores
+				$index = 0;
 				foreach($arreglo as $key => $value){
-				  if(!isset($modificado[$key])){
-				       $disponible[$key] = $value; //horas disponibles que mostrare en el combobox
-				  }
+				  	if(!isset($modificado[$key])){
+				       	$disponible[$index] = $value; //horas disponibles que mostrare en el combobox
+						$index++;
+				  	}
 				}
-
 			}
 			array_push($data, $disponible);
 		}
@@ -196,7 +200,6 @@ public function view($titulo = 'home', $arg)
 			'dia' => $this->input->post('dia_cita'),
 			'hora' => $this->input->post('hora_cita'),
 		);
-		
 		$cveUsu = $this->cita_model->insert_cita($data);
 		redirect(base_url("index.php/cita/nuevo"));
 	}

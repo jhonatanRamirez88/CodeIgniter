@@ -1,6 +1,7 @@
 <section>
-	<h1><?php echo $title; 
-		?></h1>		
+	<h2><strong>Modificar cita</strong></h2>	
+
+	<h1><strong>Paciente:</strong><?php echo $pacientedatos['nombre'].' '.$pacientedatos['ap_paterno']?></h1>
 
 	<form method="POST" action="<?php echo base_url(); ?>index.php/Cita/executeUpdate">
 		<div class="row uniform 50%">
@@ -44,6 +45,7 @@
 <script type="text/javascript">
 	//Desabilitar 
 	$('#doctor').change(function (){
+		console.log('hlo');
   		$("#fecha").attr("readonly", false);
 	});
 	var coso;
