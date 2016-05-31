@@ -46,12 +46,12 @@
 	});
 	function openAlert(cve){
 	    if (confirm("¿Desas hacer el cambio?") == true) {
-	        location.href="http://localhost/CodeIgniter/index.php/Especialidad/upLic/"+cve+"/"+$('input#desc'+cve).val();;
+	        location.href="<?php echo base_url();?>index.php/Especialidad/upLic/"+cve+"/"+$('input#desc'+cve).val();;
 	    }
 	}
 	function alertDelete(cve){
 	    if (confirm("¿Desas hacer el cambio?") == true) {
-	        location.href="http://localhost/CodeIgniter/index.php/Especialidad/deLic/"+cve;
+	        location.href="<?php echo base_url();?>index.php/Especialidad/deLic/"+cve;
 	    }
 	}
 </script>

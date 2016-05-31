@@ -3,3 +3,21 @@ create view dsh as select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_
 
 //vista dch 
 create view dch as select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve in (select cve_doc from horario group by cve_doc);
+
+//PRocedimiento de hacer un insert in la tabla de horario, si el campo existe solo hace un update
+CREATE OR REPLACE FUNCTION merge_horario(dia INT, doc INT, d1 time, d2 time) RETURNS TEXT AS 
+$$
+BEGIN
+ LOOP
+  UPDATE horario SET (hora_inicio,hora_fin)=(d1,d2) WHERE cve_dia = dia AND cve_doc=doc; 
+  IF found THEN 
+   RETURN 'AVISO:: Se hizo el UPDATE.';
+  END IF;
+  BEGIN 
+   INSERT INTO horario (cve_dia, cve_doc, hora_inicio, hora_fin, intervalo) VALUES (dia, doc, d1, d2, '00:00');
+   RETURN 'AVISO:: Se hizo el INSERT.';
+  END;
+ END LOOP;
+END;
+$$
+LANGUAGE plpgsql;
