@@ -4,7 +4,13 @@ create view dsh as select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_
 //vista dch 
 create view dch as select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve in (select cve_doc from horario group by cve_doc);
 
-//PRocedimiento de hacer un insert in la tabla de horario, si el campo existe solo hace un update
+//procedimiento
+CREATE FUNCTION clean_horario_doc(cve INT) RETURNS void AS '
+ DELETE FROM horario 
+   WHERE cve_doc = cve
+' LANGUAGE SQL;
+
+//FUNCION de hacer un insert in la tabla de horario, si el campo existe solo hace un update
 CREATE OR REPLACE FUNCTION merge_horario(dia INT, doc INT, d1 time, d2 time) RETURNS TEXT AS 
 $$
 BEGIN
@@ -21,3 +27,20 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+/*TRIGGER*/
+//Paso 1- CREAR UN PROCEDIMIENTO
+
+CREATE OR REPLACE FUNCTION protege_historial() RETURNS TRIGGER AS $proteger_historial$
+DECLARE
+BEGIN
+--Protege de hacer alguna eliminacion de la tabla
+RETURN NULL;
+END;
+$proteger_historial$ LANGUAGE plpgsql;
+
+//Paso 2- CREAR EL TIGGER
+CREATE TRIGGER proteger_historial BEFORE DELETE
+ ON historial FOR EACH ROW
+EXECUTE PROCEDURE protege_historial();
+
