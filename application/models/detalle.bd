@@ -1,10 +1,12 @@
+/-------------------Q.1--------------------*/
 //vista dsh
 create view dsh as select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve not in (select cve_doc from horario group by cve_doc);
 
 //vista dch 
 create view dch as select doctor.cve AS cdoc, usuario.nombre AS nom, usuario.ap_paterno AS ape from usuario inner join doctor on usuario.cve = doctor.cve_usu where doctor.cve_vigencia = 1 and doctor.cve in (select cve_doc from horario group by cve_doc);
 
-//procedimiento
+/-------------------Q.2--------------------*/
+//PROCEDIMIENTO
 CREATE FUNCTION clean_horario_doc(cve INT) RETURNS void AS '
  DELETE FROM horario 
    WHERE cve_doc = cve
@@ -28,6 +30,7 @@ END;
 $$
 LANGUAGE plpgsql;
 
+/-------------------Q.3--------------------*/
 /*TRIGGER*/
 //Paso 1- CREAR UN PROCEDIMIENTO
 
@@ -44,3 +47,14 @@ CREATE TRIGGER proteger_historial BEFORE DELETE
  ON historial FOR EACH ROW
 EXECUTE PROCEDURE protege_historial();
 
+/-------------------Q.4--------------------*/
+/*MAKE BACKUP*/
+// 1.
+//BACKUP. 
+cmd:: pg_dump dbname > outfile
+example :
++ pg_dump rgjs > /home/ricardo/Documentos/respRGJS.sql
+//RESTORING
+cmd: psql dbname < infile
+example::
++ psql rgjs < /home/ricardo/Documentos/respRGJS.sql
