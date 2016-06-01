@@ -8,7 +8,7 @@ class Login_model extends CI_Model {
 	}
 
 	public function login_usu($data){
-		$sql = "Select * from usuario where usuario = '".$data['usuario']."' and password = '".$data['password']."';";
+		$sql = "Select tipo from usuario where usuario = '".$data['usuario']."' and password = '".$data['password']."';";
 		$res = $this->db->query($sql);
 		if ($res->num_rows() > 0){
 			return $res->result_array();	
