@@ -49,6 +49,34 @@ class Paciente extends CI_Controller {
 		$this->paciente_model->nuevo($data1);
 		redirect(base_url("index.php/Paciente/verNuevo"));
 	}
+
+	public function verTodo(){
+		$arg['data'] = $this->paciente_model->select_all();
+		$arg['page'] = 'paciente/consultar';
+		$this->view('holo', $arg);
+	}
+
+	public function verUpdate($val){
+		$data['numero'] = $val;
+		$arg['data'] = $this->paciente_model->select_paciente($data);
+		$arg['page'] = 'paciente/cambiar';
+		$this->view('wu', $arg);
+	}
+
+	public function doUpdate(){
+		$data = array(
+			'cam1' => $this->input->post('nom'),
+			'cam2' => $this->input->post('appat'),
+			'cam3' => $this->input->post('apmat'),
+			'cam4' => $this->input->post('telpar'),
+			'cam5' => $this->input->post('fnac'),
+			'cam6' => $this->input->post('sex'),
+			'cam7' => $this->input->post('dir'),
+			'numero' => $this->input->post('oculto')
+		);
+		$this->paciente_model->update($data);
+		redirect(base_url("index.php/Paciente/verTodo"));	
+	}
 }
 
 ?>
