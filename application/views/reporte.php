@@ -15,7 +15,7 @@
 			<tbody>
 			<!--	<?php 
 					$indice = 0;
-					foreach ($datos as $item ): 
+					foreach ($reporte as $item ): 
 					?>
 					<tr id="row<?php echo $item['cve']; ?>">
 						<td><?php echo $indice+=1; ?></td>

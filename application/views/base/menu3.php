@@ -12,6 +12,7 @@
 						<li><a href="<?php echo base_url();?>index.php/Doctor/ver_update_horario">Modificar horario</a></li>
 						<li><a href="<?php echo base_url();?>index.php/cita/nuevo">Crear cita</a></li>
 						<li><a href="<?php echo base_url();?>index.php/cita/buscar_paciente">Ver cita</a></li>
+						<li><a href="<?php echo base_url();?>index.php/Login/login">Salir</a></li>
 					</ul>
 				</nav>
 			</header>
