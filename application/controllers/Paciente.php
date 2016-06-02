@@ -11,6 +11,7 @@ class Paciente extends CI_Controller {
 
 	public function view($titulo = 'home', $arg)
 	{
+
         if ( ! file_exists(APPPATH.'views/'.$arg['page'].'.php'))
         {
                 // Whoops, we don't have a page for that!
@@ -18,11 +19,19 @@ class Paciente extends CI_Controller {
         }
         $data['title'] = ucfirst($titulo);
         $this->load->view('base/head', $data);
-        $this->load->view('base/menu');     
+		session_start();
+		if($_SESSION['tipo'] == '0'){
+			$this->load->view('base/menu');     
+		}elseif ($_SESSION['tipo'] == '1') {
+			$this->load->view('base/menu2');     
+		}elseif ($_SESSION['tipo'] == '2') {
+			$this->load->view('base/menu3');     
+		}        
         $this->load->view($arg['page'], $arg);
         $this->load->view('base/foot');
 	}
 	public function verNuevo(){
+		
 		$par1 = 'Crear Paciente';
 		$arg['page'] = 'paciente/nuevo';
 		$this->view($par1,$arg);		

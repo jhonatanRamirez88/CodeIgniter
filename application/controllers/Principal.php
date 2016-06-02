@@ -14,7 +14,15 @@ class Principal extends CI_Controller {
                         show_404();
                 }
                 $this->load->view('base/head');
-                $this->load->view('base/menu');        
+                session_start();
+                if($_SESSION['tipo'] == '0'){
+                        $this->load->view('base/menu');     
+                }elseif ($_SESSION['tipo'] == '1') {
+                        $this->load->view('base/menu2');     
+                }elseif ($_SESSION['tipo'] == '2') {
+                        $this->load->view('base/menu3');     
+                }        
+                //$this->load->view('base/menu');        
                 $this->load->view($titulo);
                 $this->load->view('base/foot');
 	}

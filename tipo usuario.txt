@@ -1,0 +1,7 @@
+alter a la tabla usuario se agrego la columna tipo 
+los tipos de usuario que se manejaran son
+ALTER TABLE usuario ADD COLUMN tipo int
+0 = Director
+1 = Doctor
+2 = Recepcionista
+3 = paciente
