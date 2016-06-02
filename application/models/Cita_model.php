@@ -23,12 +23,6 @@ class Cita_Model extends CI_Model{
 	}
 
 	/*
-	public function todo($data){
-		$sql = "select cita.cve as cve,doctor.cve_usu as cdoc,usuario.nombre as nombre,cita.hora as hora,cita.fecha as fecha from cita,doctor,usuario where cita.cve_doc=doctor.cve and usuario.cve=doctor.cve_usu and cita.cve_usu=".$data['doc'].";";
-		$gethoras=$this->db->query($sql);
-		return $gethoras->result_array();
-	}*/
-	/*
 	Optenemos el registro de a tabla cita especificado por su clave
 	*/
 	public function get_cita_cve($data){
@@ -53,7 +47,7 @@ class Cita_Model extends CI_Model{
 	public function eliminar_cita($data){
 		//estoy en la parte de eliminacionnn
 		$sql = "delete from cita where cve=".$data['cve'].";";
-		$res = $this->db->query($sql);																								
+		$res = $this->db->query($sql);
 	}
 
 	public function update_cita($data){
@@ -62,5 +56,11 @@ class Cita_Model extends CI_Model{
 		$this->db->query($sql);
 	}
 
+	/*Obtenemos las citas mediante su clave de doctor, usando su usuario.cve y la fecha del dia de hoy*/
+	public function getCitasDelDoctor($data){
+		$sql = "select citasv.cvedoc, citasv.doctor, citasv.fecha, citasv.hora, citasv.cvecita, citasv.paciente as cvepac, usuario.nombre as paciente, usuario.ap_paterno as pat from citasv inner join usuario on citasv.paciente = usuario.cve where cvedoc = ".$data['numero']." and fecha = current_date ORDER BY hora";
+		$res = $this->db->query($sql);
+		return $res->result_array();
+	}
 }
 ?>

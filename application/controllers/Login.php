@@ -52,6 +52,7 @@ public function view($titulo = 'home', $arg)
 				$z = $x[0];
 				$w = $z['tipo'];
 			//var_dump($arg);
+
 			if ($z['tipo'] == '0'){
 				session_start();
 				$_SESSION['tipo'] = '0';//sesion para director
@@ -64,6 +65,7 @@ public function view($titulo = 'home', $arg)
 			}				
 			else if($z['tipo'] == '1'){
 				session_start();
+				$_SESSION['doctor_clave'] = $arg['login']['cve'];
 				 $_SESSION['tipo'] = '1';
 				 $_SESSION['usuario']= 'Doctor';
 				$this->load->view('base/menu2');        

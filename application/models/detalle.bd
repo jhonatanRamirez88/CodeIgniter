@@ -58,3 +58,7 @@ example :
 cmd: psql dbname < infile
 example::
 + psql rgjs < /home/ricardo/Documentos/respRGJS.sql
+
+/*.-------------------------VIEW.AUX------------------------*/
+Paso1. Executar este sql.
+create view citasv as select usuario.cve as cvedoc, usuario.nombre as doctor, cita.fecha, cita.hora, cita.cve as cvecita, cita.cve_usu as paciente from cita inner join doctor on cita.cve_doc = doctor.cve inner join usuario on doctor.cve_usu = usuario.cve;

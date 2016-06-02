@@ -211,7 +211,14 @@ public function view($titulo = 'home', $arg)
 		$cveUsu = $this->cita_model->insert_cita($data);
 		redirect(base_url("index.php/cita/nuevo"));
 	}
-
+	/**/
+	public function verCitasDelDoctor(){
+		$session_start();
+		$data['numero'] = $_SESSION['doctor_clave'];
+		$data1['citas'] = $this->cita_model->getCitasDelDoctor($data);
+		$data1['page'] = 'doctor/consultar_pacientes';
+		$this->view('kopo', $data1);
+	}
 
 }
 
