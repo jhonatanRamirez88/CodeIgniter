@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //El módulos de altas, modificaciones y bajas de citas, muestra en un combo los nombres de los pacientes, los nombres de los médicos y el calendario disponible, de acuerdo al médico y la fecha elegida
 
-class login extends CI_Controller {
+class Login extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
