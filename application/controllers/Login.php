@@ -61,7 +61,7 @@ public function view($titulo = 'home', $arg)
 				session_start();
 				$_SESSION['tipo'] = '0';//sesion para director
 				$_SESSION['usuario']= 'Director';
-				var_dump($arg);
+				//var_dump($arg);
 				$this->load->view('base/menu');        
 				$arg['page'] = 'bienvenido';
 				$this->view($encabe, $arg);	

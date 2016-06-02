@@ -98,7 +98,7 @@ class Paciente extends CI_Controller {
 			'numero' => $this->input->post('oculto')
 		);
 		$this->paciente_model->update($data);
-		redirect(base_url("index.php/Historial/get_paciente/".$this->input->post('oculto')));	
+		redirect(base_url("index.php/Historial/get_paciente2/".$this->input->post('oculto')));	
 	}
 }
 

@@ -19,7 +19,7 @@
 						<td id=""><?php echo $item['paciente']." ".$item['pat']; ?></td>
 						<td id=""><?php echo $item['hora']; ?></td>
 						<td id="btn">
-							<input value="Atender" onclick="atender(<?php echo $item['cvepac']; ?>)" type="button" />
+							<input value="Atender" onclick="atender(<?php echo $item['cvepac']; ?>,<?php echo $item['cvecita']; ?>)" type="button" />
 						</td>
 					</tr>	
 				<?php endforeach; ?>
@@ -28,7 +28,7 @@
 	</div>
 </section>
 <script type="text/javascript">
-	function atender(cve){
-	    location.href="<?php echo base_url();?>index.php/Historial/get_paciente/"+cve;
+	function atender(cve,cvecita){
+	    location.href="<?php echo base_url();?>index.php/Historial/get_paciente/"+cve+"/"+cvecita;
 	}
 </script>

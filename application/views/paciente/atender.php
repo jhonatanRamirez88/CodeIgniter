@@ -22,6 +22,7 @@
 				Direccion:<input name="dir" type="text" value="<?php echo $paciente['dir']; ?>" required></input>
 			</div>
 			<div class="4u 12u$(xsmall)">
+			Selecciones sexo:
 				<select name="sex" required>
 					<option value="true">Mujer</option>
 					<option value="false">Hombre</option>
@@ -38,7 +39,7 @@
 	</form>
 	<div class="12u 12u(medium) 12u$(small)">
 		<ul class="actions vertical">
-			<li><a href="<?php echo base_url(); ?>#" class="button fit">Agregar Nuevo diagnostico</a></li>
+			<li><a href="<?php echo base_url(); ?>index.php/Historial/nuevo_historial/<?php echo $paciente['cve_usu']?>" class="button fit">Agregar Nuevo diagnostico</a></li>
 		</ul>
 	</div>
 	<section>
@@ -66,7 +67,7 @@
 							<td id=""><?php echo $item['desc']; ?></td>
 							<td id=""><?php echo $item['obs']; ?></td>
 							<td id="">
-								<input value="Actualizar" onclick="cambiar(<?php echo $item['cvediag']; ?> , <?php echo $item['cveusu']; ?>)" type="button" />
+								<input value="Actualizar" onclick="cambiar(<?php echo $item['cvediag']; ?>)" type="button" />
 							</td>
 						</tr>	
 					<?php endforeach; ?>
@@ -77,7 +78,7 @@
 </section>
 
 <script type="text/javascript">
-	function cambiar(cita, usu){
-	    location.href="<?php echo base_url();?>index.php/CREAR UPDATE/"+cita+"/"+usu;
+	function cambiar(cita){
+	    location.href="<?php echo base_url();?>index.php/Historial/uphisto/"+cita;
 	}
 </script>
