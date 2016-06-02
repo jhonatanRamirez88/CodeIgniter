@@ -14,7 +14,7 @@
 						<li><a href="<?php echo base_url();?>index.php/cita/buscar_paciente">Ver cita</a></li>
 						<li><a href="<?php echo base_url();?>index.php/Paciente/verNuevo">Crear paciente.</a></li>
 						<li><a href="<?php echo base_url();?>index.php/Paciente/verTodo">Ver pacientes.</a></li>
-						<li><a href="<?php echo base_url();?>index.php/Login/login">Salir</a></li>
+						<li><a href="<?php echo base_url();?>index.php/Login/salir">Salir</a></li>
 					</ul>
 				</nav>
 			</header>

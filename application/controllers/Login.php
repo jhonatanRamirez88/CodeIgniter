@@ -30,6 +30,15 @@ public function view($titulo = 'home', $arg)
 		$this->view($encabe, $arg);		
 	}//fin funcion inicio
 
+	public function salir(){
+		session_start();
+		// remove all session variables
+		session_unset(); 
+		// destroy the session 
+		session_destroy(); 
+        redirect(base_url("index.php/Login/login"));		
+	}
+
 
 	public function login(){
 		$encabe = 'Login usuarios';

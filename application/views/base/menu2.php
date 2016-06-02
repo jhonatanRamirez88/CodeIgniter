@@ -13,7 +13,7 @@
 						<li><a href="<?php echo base_url();?>index.php/Cita/verCitasDelDoctor">Agenda de hoy.</a></li>
 						<li><a href="<?php echo base_url();?>index.php/cita/nuevo">Crear cita</a></li>
 						<li><a href="<?php echo base_url();?>index.php/cita/buscar_paciente">ver cita</a></li>
-						<li><a href="<?php echo base_url();?>index.php/Login/login">Salir</a></li>
+						<li><a href="<?php echo base_url();?>index.php/Login/salir">Salir</a></li>
 						<!-- actualizacion de pascientes-->
 					</ul>
 				</nav>
