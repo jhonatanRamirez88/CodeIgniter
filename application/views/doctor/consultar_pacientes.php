@@ -19,7 +19,7 @@
 						<td id=""><?php echo $item['paciente']." ".$item['pat']; ?></td>
 						<td id=""><?php echo $item['hora']; ?></td>
 						<td id="btn">
-							<input value="Atender" onclick="atender(<?php echo $item['cvecita']; ?>)" type="button" />
+							<input value="Atender" onclick="atender(<?php echo $item['cvepac']; ?>)" type="button" />
 						</td>
 					</tr>	
 				<?php endforeach; ?>

@@ -33,10 +33,10 @@ class Historial extends CI_Controller {
 	}
 	/*Obtenemos los datos del usuario */
 	public function get_paciente($var){
-
+		$data['numero'] = $var;
 		$arg['page']='paciente/atender';
-		$arg['paciente'] = $this->paciente_model->select_paciente($var);
-		$this->load->view('Paciente que se esta atendiendo', $arg);
+		$arg['paciente'] = $this->paciente_model->select_paciente($data);
+		$this->view($arg['page'], $arg);
 	}
 
 }

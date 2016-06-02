@@ -1,6 +1,5 @@
 <section>
-<h1><?php echo $title; ?></h1>		
-
+<h1></h1>		
 	<form method="POST" action="">
 		<div class="row uniform 50%">
 			<input type="hidden" name="oculto" value="<?php echo $paciente['cve_usu']; ?>">
@@ -8,19 +7,19 @@
 				Nombre: <input name="nom" type="text" value="<?php echo $paciente['nom'];  ?>" required/>
 			</div>
 			<div class="4u 12u$(xsmall)">
-				Apellido paterno:<input name="appat" type="text" required><?php echo $paciente['pat'];  ?></input>
+				Apellido paterno:<input name="appat" type="text" value="<?php echo $paciente['pat']; ?>" required></input>
 			</div>
 			<div class="4u 12u$(xsmall)">	
-				Apellido materno:<input name="apmat" type="text" required><?php echo $paciente['mat'];  ?></input>
+				Apellido materno:<input name="apmat" type="text" value="<?php echo $paciente['mat']; ?>" required></input>
 			</div>
 			<div class="4u 12u$(xsmall)">
-				Telefono particular:<input name="telpar" type="tel" required><?php echo $paciente['telpar'];  ?></input>
+				Telefono particular:<input name="telpar" type="tel" value="<?php echo $paciente['telpar']; ?>" required></input>
 			</div>
 			<div class="4u 12u$(xsmall)">
-				Fecha de Nacimiento:<input name="fnac" type="date" required><?php echo $paciente['nac'];  ?></input>
+				Fecha de Nacimiento:<input name="fnac" type="date" value="<?php echo $paciente['nac']; ?>" required></input>
 			</div>
 			<div class="4u 12u$(xsmall)">
-				Direccion:<input name="dir" type="text" required><?php echo $paciente['dir'];  ?></input>
+				Direccion:<input name="dir" type="text" value="<?php echo $paciente['dir']; ?>" required></input>
 			</div>
 			<div class="4u 12u$(xsmall)">
 				<select name="sex" required>
