@@ -16,7 +16,7 @@ class Reporte_model extends CI_Model {
 		$sql ="CREATE OR REPLACE VIEW reporte AS select doctores.nomdoc, usuarios.nomusu, usuarios.fecha, usuarios.hora from usuarios,doctores 
 where usuarios.fecha=doctores.fecha and usuarios.hora=doctores.hora;";
 		$this->db->query($sql);
-		$sql = "select * from reporte where fecha between '".$data['di']."' and '".$data['df']."';";
+		$sql = "select * from reporte where fecha between '".$data['di']."' and '".$data['df']."' order by fecha;";
 		$res = $this->db->query($sql);
 		if ($res->num_rows() > 0){
 			return $res->result_array();	

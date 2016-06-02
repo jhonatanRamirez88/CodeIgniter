@@ -40,7 +40,14 @@ class reporte extends CI_Controller {
 		);
 		$arg['page'] = 'reporte';
 		$arg['reporte']=$this->reporte_model->reporte($data);
-		$this->view($encabe, $arg);	
+		if ($arg['reporte']== FALSE) {
+			$encabe = 'Reporte';
+			$arg['page'] = 'reportev1';
+			$this->view($encabe, $arg);	
+		}else{
+			$this->view($encabe, $arg);	
+		}
+		
 
 	}//fin funcion
 
