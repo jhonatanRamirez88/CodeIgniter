@@ -29,6 +29,6 @@
 </section>
 <script type="text/javascript">
 	function atender(cve){
-	    location.href="<?php echo base_url();?>index.php/Doctor/verUpdateConsulta/"+cve;
+	    location.href="<?php echo base_url();?>index.php/Historial/get_paciente/"+cve;
 	}
 </script>
