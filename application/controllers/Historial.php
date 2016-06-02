@@ -8,6 +8,7 @@ class Historial extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('horario_model');
 		$this->load->model('paciente_model');
+		$this->load->model('historial_model');
 	}
 
 	public function view($titulo = 'home', $arg)
@@ -36,6 +37,7 @@ class Historial extends CI_Controller {
 		$data['numero'] = $var;
 		$arg['page']='paciente/atender';
 		$arg['paciente'] = $this->paciente_model->select_paciente($data);
+		$arg['historial'] = $this->historial_model->get_by_cvepaciente($data);
 		$this->view($arg['page'], $arg);
 	}
 

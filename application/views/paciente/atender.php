@@ -1,6 +1,6 @@
 <section>
 <h1></h1>		
-	<form method="POST" action="">
+	<form method="POST" action="<?php echo base_url(); ?>index.php/Paciente/doUpdateParaDoctorMenu">
 		<div class="row uniform 50%">
 			<input type="hidden" name="oculto" value="<?php echo $paciente['cve_usu']; ?>">
 			<div class="4u 12u$(xsmall)">
@@ -12,7 +12,7 @@
 			<div class="4u 12u$(xsmall)">	
 				Apellido materno:<input name="apmat" type="text" value="<?php echo $paciente['mat']; ?>" required></input>
 			</div>
-			<div class="4u 12u$(xsmall)">
+			<div class="4u 12u$(xsmall)">	
 				Telefono particular:<input name="telpar" type="tel" value="<?php echo $paciente['telpar']; ?>" required></input>
 			</div>
 			<div class="4u 12u$(xsmall)">
@@ -30,15 +30,15 @@
 
 			<div class="12u 12u$(xsmall)">
 				<ul class="actions">
-					<li><input type="submit" value="Guardar" class="special" /></li>
-					<li><input type="reset" value="Limpiar" /></li>
+					<li><input type="submit" value="Guardar" class="button alt fit" /></li>
+					<li><input type="reset" value="Limpiar" class="button alt fit" /></li>
 				</ul>		
 			</div>
 		</div>
 	</form>
 	<div class="12u 12u(medium) 12u$(small)">
 		<ul class="actions vertical">
-			<li><a href="#" class="button fit">Agregar diagnostico</a></li>
+			<li><a href="<?php echo base_url(); ?>#" class="button fit">Agregar Nuevo diagnostico</a></li>
 		</ul>
 	</div>
 	<section>
@@ -47,22 +47,26 @@
 				<thead>
 					<tr>	
 						<th>#</th>
-						<th>N</th>
-						<th>A</th>
+						<th>Fecha</th>
+						<th>Diagnostico</th>
+						<th>Descripción</th>
+						<th>Observaciones</th>
+						<th>Actualizar</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php 
 						$indice = 0;
-						foreach ($data as $item ): 
+						foreach ($historial as $item ): 
 						?>
-						<tr id="row<?php echo $item['cve_usu']; ?>">
+						<tr id="">
 							<td><?php echo $indice+=1; ?></td>
-							<td id=""><?php echo $item['nom']; ?></td>
-							<td id=""><?php echo $item['pat']; ?></td>
-							<td id=""><?php echo $item['telpar']; ?></td>
+							<td id=""><?php echo $item['fecha']; ?></td>
+							<td id=""><?php echo $item['diag']; ?></td>
+							<td id=""><?php echo $item['desc']; ?></td>
+							<td id=""><?php echo $item['obs']; ?></td>
 							<td id="">
-								<input value="Actualizar" onclick="alertUpdate(<?php echo $item['cve_usu']; ?>)" type="button" />
+								<input value="Actualizar" onclick="cambiar(<?php echo $item['cvediag']; ?> , <?php echo $item['cveusu']; ?>)" type="button" />
 							</td>
 						</tr>	
 					<?php endforeach; ?>
@@ -73,5 +77,7 @@
 </section>
 
 <script type="text/javascript">
-	
+	function cambiar(cita, usu){
+	    location.href="<?php echo base_url();?>index.php/CREAR UPDATE/"+cita+"/"+usu;
+	}
 </script>

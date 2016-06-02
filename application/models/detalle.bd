@@ -62,3 +62,20 @@ example::
 /*.-------------------------VIEW.AUX------------------------*/
 Paso1. Executar este sql.
 create view citasv as select usuario.cve as cvedoc, usuario.nombre as doctor, cita.fecha, cita.hora, cita.cve as cvecita, cita.cve_usu as paciente from cita inner join doctor on cita.cve_doc = doctor.cve inner join usuario on doctor.cve_usu = usuario.cve;
+
+
+/*----------------------------ESQUEMA--------------*/
+Paso1.
+alter table historial add column cve int 
+Paso2.
+alter table historial alter column cve set not null;
+Paso3.
+alter table historial add primary key (cve);
+Paso4. 
+create sequence auto_cve_seq
+ start 1
+ increment 1
+ NO MAXVALUE
+ CACHE 1;
+Paso5. 
+alter table historial alter cve set default nextval('auto_cve_seq');
