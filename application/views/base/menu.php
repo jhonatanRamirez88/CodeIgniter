@@ -4,7 +4,7 @@
 
 				<nav id="nav">
 					<ul>
-						<li><a href="<?php echo base_url();?>index.php/esp/nuevo">R. consultas</a></li>
+						<li><a href="<?php echo base_url();?>index.php/Reporte/reporte">R. consultas</a></li>
 						<li><a href="<?php echo base_url();?>index.php/esp/nuevo">C. Esp</a></li>
 						<li><a href="<?php echo base_url();?>index.php/esp/ver">V. Esp</a></li>
 						<li><a href="<?php echo base_url();?>index.php/doc/nuevo">C. Doctor</a></li>
