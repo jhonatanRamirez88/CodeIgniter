@@ -12,6 +12,7 @@ class Cita extends CI_Controller {
 		$this->load->model('cita_model');
 		$this->load->model('doctor_model');
 		$this->load->model('dia_model');
+		session_start();
 	}
 
 public function view($titulo = 'home', $arg)
@@ -23,7 +24,6 @@ public function view($titulo = 'home', $arg)
         }
         $data['title'] = ucfirst($titulo);
         $this->load->view('base/head', $data);
-        session_start();
 		if($_SESSION['tipo'] == '0'){
 			$this->load->view('base/menu');     
 		}elseif ($_SESSION['tipo'] == '1') {
@@ -213,7 +213,6 @@ public function view($titulo = 'home', $arg)
 	}
 	/**/
 	public function verCitasDelDoctor(){
-		$session_start();
 		$data['numero'] = $_SESSION['doctor_clave'];
 		$data1['citas'] = $this->cita_model->getCitasDelDoctor($data);
 		$data1['page'] = 'doctor/consultar_pacientes';

@@ -48,12 +48,7 @@ public function view($titulo = 'home', $arg)
 		if ($arg['login'] == FALSE){
 			$this->view($encabe, $arg);	
 		}else{
-				$x = $arg['login'];
-				$z = $x[0];
-				$w = $z['tipo'];
-			//var_dump($arg);
-
-			if ($z['tipo'] == '0'){
+			if ($arg['login']['tipo'] == '0'){
 				session_start();
 				$_SESSION['tipo'] = '0';//sesion para director
 				$_SESSION['usuario']= 'Director';
@@ -61,17 +56,16 @@ public function view($titulo = 'home', $arg)
 				$this->load->view('base/menu');        
 				$arg['page'] = 'bienvenido';
 				$this->view($encabe, $arg);	
-				var_dump($_SESSION);
 			}				
-			else if($z['tipo'] == '1'){
+			else if($arg['login']['tipo'] == '1'){
 				session_start();
 				$_SESSION['doctor_clave'] = $arg['login']['cve'];
-				 $_SESSION['tipo'] = '1';
-				 $_SESSION['usuario']= 'Doctor';
+				$_SESSION['tipo'] = '1';
+				$_SESSION['usuario']= 'Doctor';
 				$this->load->view('base/menu2');        
 				$arg['page'] = 'bienvenido';
 				$this->view($encabe, $arg);		
-			}else if($z['tipo'] == '2'){
+			}else if($arg['login']['tipo'] == '2'){
 				session_start();
 				 $_SESSION['tipo'] = '2';
 				 $_SESSION['usuario']= 'Secretaria';

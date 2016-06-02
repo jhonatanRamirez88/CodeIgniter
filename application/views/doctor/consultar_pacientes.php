@@ -14,11 +14,11 @@
 					$indice = 0;
 					foreach ($citas as $item ): 
 					?>
-					<tr id="row<?php echo $item['cve']; ?>">
+					<tr id="">
 						<td><?php echo $indice+=1; ?></td>
-						<td id=""><?php echo $item['nombre']." ".$item['pat']; ?></td>
+						<td id=""><?php echo $item['paciente']." ".$item['pat']; ?></td>
 						<td id=""><?php echo $item['hora']; ?></td>
-						<td id="btnRe<?php echo $item['cve']; ?>">
+						<td id="btn">
 							<input value="Atender" onclick="atender(<?php echo $item['cvecita']; ?>)" type="button" />
 						</td>
 					</tr>	
