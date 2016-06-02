@@ -23,14 +23,28 @@ class reporte extends CI_Controller {
         $this->load->view($arg['page'], $arg);
         $this->load->view('base/foot');
 	}
-	
+
 	public function reporte(){
 		$encabe = 'Reporte';
-		$arg['page'] = 'reporte';
-		$arg['reporte']=$this->reporte_model->reporte();
+		$arg['page'] = 'reportev1';
+		//$arg['reporte']=$this->reporte_model->reporte();
 		$this->view($encabe, $arg);	
 
 	}//fin funcion
+
+	public function buscar(){
+		$encabe = 'Reporte';
+		$data = array(
+			'di' => $this->input->post('diaini'),
+			'df' => $this->input->post('diafin'),
+		);
+		$arg['page'] = 'reporte';
+		$arg['reporte']=$this->reporte_model->reporte($data);
+		$this->view($encabe, $arg);	
+
+	}//fin funcion
+
+
 
 }//fin clase
 
