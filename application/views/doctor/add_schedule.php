@@ -1,6 +1,5 @@
 <section>	
 	<header class="major">
-<<<<<<< Updated upstream
 		<h2>Crear horario del doctor</h2>
 			<h1>Selecciona un doctor:</h1>
 			<select id="opt">
@@ -16,31 +15,17 @@
 				<?php foreach ($dias as $dia): ?>
 					<option class="" value="<?php echo $dia['cve']?>"><?php echo $dia['descripcion']?></option>
 				<?php endforeach; ?>				
-=======
-		<h2>Selecciona un doctor</h2>
-		<p>
-			<select id="opt" >
-				<option value=""></option>
-				<?php foreach ($docs as $doc): ?>
-					<?php  $var = $doc['nom']." ".$doc['ape']; ?>
-					<option class="valor" value="<?php echo $doc['cdoc']?>"><?php echo $var ?></option>
-				<?php endforeach; ?>			
->>>>>>> Stashed changes
 			</select>
 	</header>
 	
 	<section id="horario" style="display: none;"><!--section.form start-->
-<<<<<<< Updated upstream
 		<h1>Horario</h1>
-=======
-		<h1>Asociar horario de atención</h1>
->>>>>>> Stashed changes
 		<form id="fro" method="POST" action="<?php echo base_url(); ?>index.php/Horario/crear_nuevo">
 			<input type="hidden" value="" name="cvedoc" id="idDoc"></input>
 			<div class="row uniform 50%">
 				<!-- trabajando con los horarios -->
 				<div class="12u 12u$(xsmall)">
-					<h4>Defina el horario:</h4>
+					<h4>Horarios de atención de: </h4>
 				</div>
 				<div class="12u 12u$(xsmall)">
 					<div class="table-wrapper">
@@ -70,7 +55,6 @@
 </section>
 
 <script type="text/javascript">
-<<<<<<< Updated upstream
 	
 	$( "#opt" ).change(function () {
 		//console.log('holo');
@@ -105,23 +89,6 @@
 
 			$('#rowstable').append(row);
 			$('#horario').show();
-=======
-
-	$(document).ready(function() {
-		$( "#opt" ).change(function () {
-			var x = $(this).find(":selected").val();
-			$('#idDoc').val(x);
-			if(x != ""){//validacion de que no sea el primer elemento.
-				$.ajax({
-				  method: "GET",
-				  url: "<?php echo base_url();?>index.php/Horario/get_horario_cve",
-				  data: {cve_doc:x}
-				}).done(function( data ) {
-					data = JSON.parse(data);
-					if(data.edo == false){
-						vals();
-					}else{
->>>>>>> Stashed changes
 
 			if (strdia.toLowerCase() == "sabado") {//Para el dia sabado tiene diferentes horarios de atencion.
 				$('#ini_'+valopt).attr('max','13:00');
